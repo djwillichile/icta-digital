@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; form-action 'self'; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>GeoTaller QGIS — Curso de cartografía profesional</title>
+  <meta name="description" content="Curso práctico de QGIS y cartografía profesional. Programa por módulos, modalidades online y presencial, instructor y formulario de inscripción." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111c33;
+      --panel-2: #16223d;
+      --line: #1f2d4d;
+      --text: #e6eefc;
+      --muted: #9bb0d3;
+      --accent: #38bdf8;
+      --accent-2: #22d3ee;
+      --green: #22c55e;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 22px; }
+    h1, h2, h3 { letter-spacing: -0.02em; }
+
+    .top {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(11,18,32,0.85); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .top-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .logo-mark {
+      width: 38px; height: 38px; border-radius: 8px;
+      object-fit: contain; display: block;
+      background: rgba(56,189,248,0.08);
+      border: 1px solid rgba(56,189,248,0.18);
+      padding: 4px;
+    }
+    .top nav { display: flex; gap: 22px; font-size: 14px; }
+    .top nav a { color: var(--muted); }
+    .top nav a:hover { color: var(--text); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 14px;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #051023; }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-outline { border-color: var(--line); color: var(--text); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-green { background: var(--green); color: #042e15; }
+    @media (max-width: 760px) { .top nav { display: none; } }
+
+    /* HERO con foto industrial + grid técnica */
+    .hero {
+      position: relative; padding: 90px 0 70px; overflow: hidden;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(110deg, rgba(11,18,32,0.96) 0%, rgba(11,18,32,0.78) 45%, rgba(11,18,32,0.45) 100%),
+        radial-gradient(900px 400px at 80% -10%, rgba(56,189,248,0.18), transparent 60%),
+        radial-gradient(700px 400px at -10% 100%, rgba(34,211,238,0.12), transparent 60%),
+        url("assets/hero-desktop.png");
+      background-size: cover, auto, auto, cover;
+      background-position: center, center, center, right center;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 760px) {
+      .hero {
+        background-image:
+          linear-gradient(180deg, rgba(11,18,32,0.92) 0%, rgba(11,18,32,0.7) 35%, rgba(11,18,32,0.96) 100%),
+          url("assets/hero-mobile.png");
+        background-size: cover, cover;
+        background-position: center, center;
+      }
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(56,189,248,0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,0.25) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse at 60% 40%, #000 30%, transparent 75%);
+    }
+    .hero-grid { position: relative; display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: center; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; color: var(--accent);
+      background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25);
+      padding: 6px 12px; border-radius: 999px; letter-spacing: 0.04em;
+    }
+    .hero h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.08; margin: 16px 0 14px; }
+    .hero p.lead { font-size: 18px; color: var(--muted); max-width: 560px; margin: 0 0 26px; }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-meta { margin-top: 24px; display: flex; gap: 24px; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
+    .hero-meta strong { color: var(--text); }
+
+    .map-card {
+      position: relative; aspect-ratio: 4/5; border-radius: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line); overflow: hidden;
+      box-shadow: 0 30px 80px -30px rgba(56,189,248,0.4);
+    }
+    .map-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .map-card::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, transparent 60%, rgba(11,18,32,0.55) 100%);
+    }
+    .map-tag {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(11,18,32,0.7); border: 1px solid var(--line);
+      padding: 6px 12px; border-radius: 8px; font-size: 12px; color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+    }
+    .map-coords {
+      position: absolute; bottom: 16px; right: 16px;
+      background: rgba(11,18,32,0.7); border: 1px solid var(--line);
+      padding: 6px 12px; border-radius: 8px; font-size: 11px; color: var(--accent);
+      font-family: "JetBrains Mono", monospace;
+    }
+    @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } .map-card { max-width: 420px; margin: 0 auto; } }
+
+    section { padding: 70px 0; border-top: 1px solid var(--line); }
+    .section-title { font-size: clamp(28px, 3.6vw, 40px); margin: 0 0 12px; }
+    .section-sub { color: var(--muted); margin: 0 0 32px; max-width: 700px; }
+
+    /* MODULOS */
+    .modulos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .modulo {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+      padding: 22px; display: grid; grid-template-columns: 50px 1fr; gap: 16px;
+    }
+    .modulo .num {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: rgba(56,189,248,0.1); color: var(--accent);
+      display: grid; place-items: center; font-weight: 800; font-family: "JetBrains Mono", monospace;
+    }
+    .modulo h3 { margin: 0 0 6px; font-size: 17px; }
+    .modulo p { margin: 0; color: var(--muted); font-size: 14px; }
+    @media (max-width: 720px) { .modulos { grid-template-columns: 1fr; } }
+
+    /* INSTRUCTOR */
+    .instructor {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 30px; align-items: center;
+      background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 32px;
+    }
+    .avatar {
+      aspect-ratio: 1/1; max-width: 220px; width: 100%;
+      border-radius: 50%; overflow: hidden;
+      background: linear-gradient(135deg, #1e3a8a, var(--accent));
+      box-shadow: 0 20px 60px -20px rgba(56,189,248,0.5);
+      margin: 0 auto;
+    }
+    .avatar img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .instructor h3 { margin: 0 0 6px; font-size: 22px; }
+    .instructor .role { color: var(--accent); font-size: 14px; font-weight: 600; }
+    .instructor p { color: var(--muted); margin: 14px 0 0; }
+    .credentials { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .cred {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+      padding: 6px 10px; border-radius: 999px; font-size: 12px; color: var(--text);
+    }
+    @media (max-width: 720px) { .instructor { grid-template-columns: 1fr; padding: 24px; } }
+
+    /* MODALIDADES */
+    .modalidades { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .moda {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 24px;
+    }
+    .moda h3 { margin: 0 0 6px; font-size: 18px; color: var(--accent); }
+    .moda .price { font-size: 22px; font-weight: 800; margin: 8px 0; }
+    .moda p { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+    .moda ul { padding-left: 18px; margin: 0; color: var(--muted); font-size: 14px; }
+    .moda ul li { margin-bottom: 4px; }
+    @media (max-width: 880px) { .modalidades { grid-template-columns: 1fr; } }
+
+    /* FAQ */
+    details {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+      padding: 16px 20px; margin-bottom: 10px;
+    }
+    details summary {
+      cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between;
+    }
+    details summary::after { content: "+"; color: var(--accent); font-size: 22px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    details p { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
+
+    /* INSCRIPCION */
+    .inscripcion {
+      background: linear-gradient(135deg, #0c1a36, #14254e);
+      border: 1px solid var(--line); border-radius: 18px; padding: 36px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+    }
+    .form-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-row label { font-size: 13px; color: var(--muted); }
+    .form-row input, .form-row select {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+      padding: 11px 14px; border-radius: 8px; color: var(--text); font-family: inherit; font-size: 14px;
+      outline: none;
+    }
+    .form-row input:focus, .form-row select:focus { border-color: var(--accent); }
+    .inscripcion .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .form-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    @media (max-width: 760px) { .inscripcion { grid-template-columns: 1fr; padding: 24px; } }
+
+    footer {
+      padding: 36px 0; background: #050b16; border-top: 1px solid var(--line); color: var(--muted);
+      font-size: 14px;
+    }
+    footer .cols { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 22px; margin-bottom: 22px; }
+    footer h4 { margin: 0 0 10px; color: var(--text); font-size: 15px; }
+    .demo-note {
+      padding-top: 18px; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 13px;
+    }
+    .demo-note a { color: var(--accent); }
+    @media (max-width: 720px) { footer .cols { grid-template-columns: 1fr; } }
+
+    .wa-float {
+      position: fixed; right: 20px; bottom: 20px; z-index: 60;
+      background: #25D366; color: #fff; border-radius: 999px;
+      padding: 13px 18px; font-weight: 700; font-size: 14px;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 16px 40px -10px rgba(37,211,102,0.45);
+    }
+    .wa-icon { width: 20px; height: 20px; fill: #fff; }
+    .back-link {
+      position: fixed; left: 20px; bottom: 20px; z-index: 60;
+      background: rgba(11,18,32,0.92); border: 1px solid var(--line);
+      padding: 10px 14px; border-radius: 999px; font-size: 13px; color: var(--text);
+    }
+    .back-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    .form-msg { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 13px; }
+    .form-msg.ok { display: block; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+      /* === Banner sticky de demostración === */
+    .icta-banner {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(11,18,32,0.92);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 12px;
+      color: #9bb0d3;
+      letter-spacing: 0.03em;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(56,189,248,0.18);
+    }
+    .icta-banner .badge {
+      background: rgba(56,189,248,0.12);
+      border: 1px solid rgba(56,189,248,0.35);
+      color: #38bdf8;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: ictaBannerPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes ictaBannerPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(56,189,248,0.5); }
+      50%      { box-shadow: 0 0 0 4px rgba(0,0,0,0); }
+    }
+    .icta-banner a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .icta-banner a:hover { text-decoration: underline; }
+
+    /* === SECCIÓN ANÁLISIS SIG (foto + texto en dos filas alternadas) === */
+    .duo {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center;
+      margin-bottom: 56px;
+    }
+    .duo:last-child { margin-bottom: 0; }
+    .duo.reverse > .duo-text { order: 2; }
+    .duo-img-wrap {
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 60px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(56,189,248,0.06) inset;
+      position: relative;
+    }
+    .duo-img-wrap::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, transparent 65%, rgba(11,18,32,0.45) 100%);
+    }
+    .duo-img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 4/3; }
+    .duo h3 { margin: 0 0 12px; font-size: clamp(22px, 2.4vw, 28px); }
+    .duo p { color: var(--muted); margin: 0 0 16px; line-height: 1.6; }
+    .features { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; color: var(--text); font-size: 14.5px; }
+    .features li {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 12px; background: rgba(56,189,248,0.05);
+      border-left: 2px solid var(--accent); border-radius: 4px;
+    }
+    .features li::before {
+      content: "▸"; color: var(--accent); flex-shrink: 0; font-family: "JetBrains Mono", monospace;
+    }
+    @media (max-width: 760px) {
+      .duo { grid-template-columns: 1fr; gap: 22px; margin-bottom: 36px; }
+      .duo.reverse > .duo-text { order: 0; }
+    }
+
+    /* === SECCIÓN EN TERRENO (foto + texto, full-bleed dentro de container) === */
+    .terreno-section { background: var(--panel); border-top: 1px solid var(--line); }
+    .terreno-card {
+      display: grid; grid-template-columns: 1.05fr 1fr; gap: 0;
+      border-radius: 18px; overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 30px 80px -30px rgba(0,0,0,0.5);
+      background: var(--panel-2);
+    }
+    .terreno-img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      min-height: 360px;
+    }
+    .terreno-text { padding: 56px 44px; }
+    .terreno-text .pill { margin-bottom: 14px; }
+    .terreno-text h2 { margin: 0 0 14px; font-size: clamp(26px, 3.2vw, 34px); }
+    .terreno-text p { color: var(--muted); margin: 0; line-height: 1.65; font-size: 16px; }
+    @media (max-width: 760px) {
+      .terreno-card { grid-template-columns: 1fr; }
+      .terreno-img { min-height: 240px; }
+      .terreno-text { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  
+<div class="icta-banner">
+  <span class="badge">Demo activa</span>
+  Desarrollado por <a href="https://icta.cl" target="_blank" rel="noopener">ICTA Ltda.</a>
+  &nbsp;·&nbsp; Proyecto de demostración &nbsp;·&nbsp;
+  <a href="https://digital.icta.cl" target="_blank" rel="noopener">digital.icta.cl</a>
+</div>
+
+<header class="top">
+    <div class="container top-inner">
+      <a href="#" class="logo">
+        <img src="assets/logo.png" alt="GeoTaller QGIS" class="logo-mark">
+        <span>GeoTaller QGIS</span>
+      </a>
+      <nav>
+        <a href="#programa">Programa</a>
+        <a href="#instructor">Instructor</a>
+        <a href="#modalidades">Modalidades</a>
+        <a href="#faq">Preguntas</a>
+        <a href="#inscripcion">Inscripción</a>
+      </nav>
+      <a class="btn btn-primary" href="#inscripcion">Inscribirme</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill">● Curso online en vivo · Cupos limitados</span>
+        <h1>Cartografía profesional con QGIS, paso a paso.</h1>
+        <p class="lead">Aprende a producir mapas técnicos, manejar capas vectoriales y raster, y entregar
+          salidas listas para informe. Curso práctico de 6 semanas con proyecto final guiado.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#inscripcion">Reservar cupo →</a>
+          <a class="btn btn-outline" href="#programa">Ver programa</a>
+        </div>
+        <div class="hero-meta">
+          <div>📅 <strong>Inicio:</strong> próxima cohorte</div>
+          <div>⏱ <strong>6 semanas</strong></div>
+          <div>🎓 <strong>Certificación incluida</strong></div>
+        </div>
+      </div>
+      <div class="map-card">
+        <img src="assets/mapa-uso-suelo.png" alt="Mapa de cobertura y uso de suelo generado en QGIS">
+        <span class="map-tag">Caso real · Cartografía profesional</span>
+        <span class="map-coords">QGIS · uso de suelo · EPSG:32719</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="analisis">
+    <div class="container">
+      <div class="duo">
+        <div class="duo-text">
+          <span class="pill">Qué vas a aprender</span>
+          <h3 style="margin: 14px 0 12px;">Análisis SIG aplicado a problemas reales</h3>
+          <p>No es teoría: aprenderás a procesar datos espaciales, integrar capas vectoriales y raster,
+            y generar análisis que respondan preguntas concretas. Dónde, cuánto, cómo cambia.</p>
+          <ul class="features">
+            <li>Análisis espacial y geoprocesamiento reproducible</li>
+            <li>Procesamiento de datos vectoriales y raster</li>
+            <li>Visualización para reportes técnicos profesionales</li>
+          </ul>
+        </div>
+        <div class="duo-img-wrap">
+          <img src="assets/analisis-sig.png" alt="Análisis SIG en QGIS con capas y datos espaciales" class="duo-img" loading="lazy">
+        </div>
+      </div>
+      <div class="duo reverse">
+        <div class="duo-text">
+          <span class="pill">Estación de trabajo</span>
+          <h3 style="margin: 14px 0 12px;">Configurarás tu propio entorno geoespacial</h3>
+          <p>Desde la instalación hasta la producción de mapas: organización de proyectos QGIS,
+            fuentes de datos abiertos, plugins clave y exportación a salidas estandarizadas para
+            entrega profesional.</p>
+          <ul class="features">
+            <li>QGIS configurado para flujo de trabajo profesional</li>
+            <li>Fuentes de datos abiertos: IDE, Copernicus, IGN</li>
+            <li>Exportación a PDF, GeoTIFF y servicios web</li>
+          </ul>
+        </div>
+        <div class="duo-img-wrap">
+          <img src="assets/estacion-geoespacial.png" alt="Estación profesional de análisis geoespacial" class="duo-img" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="programa">
+    <div class="container">
+      <h2 class="section-title">Programa por módulos</h2>
+      <p class="section-sub">6 módulos prácticos, cada uno con un ejercicio guiado y un mini-proyecto.</p>
+      <div class="modulos">
+        <div class="modulo"><div class="num">01</div><div><h3>Fundamentos de QGIS</h3><p>Interfaz, proyectos, sistemas de referencia, importación de datos vectoriales y raster.</p></div></div>
+        <div class="modulo"><div class="num">02</div><div><h3>Edición y atributos</h3><p>Tablas de atributos, edición de geometrías, joins y consultas espaciales básicas.</p></div></div>
+        <div class="modulo"><div class="num">03</div><div><h3>Geoprocesamiento</h3><p>Buffers, intersecciones, dissolve, clip, modelos gráficos y procesos batch.</p></div></div>
+        <div class="modulo"><div class="num">04</div><div><h3>Análisis raster</h3><p>Mosaicos, álgebra de bandas, clasificación supervisada introductoria, MDT y pendientes.</p></div></div>
+        <div class="modulo"><div class="num">05</div><div><h3>Cartografía y composición</h3><p>Composer / impresión, simbología avanzada, mapas temáticos y exportación a PDF.</p></div></div>
+        <div class="modulo"><div class="num">06</div><div><h3>Proyecto final</h3><p>Mapa técnico completo con datos reales. Entrega revisada por el instructor.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="terreno" class="terreno-section">
+    <div class="container">
+      <div class="terreno-card">
+        <img src="assets/profesional-terreno.png" alt="Profesional con equipo geoespacial trabajando en terreno" class="terreno-img" loading="lazy">
+        <div class="terreno-text">
+          <span class="pill">Aplicación real</span>
+          <h2>De la pantalla al terreno</h2>
+          <p>Los mapas no terminan en QGIS. Te enseñamos a producir cartografía que llega a faena,
+            planta o estudio con la información que el equipo necesita: capas validadas, simbología
+            clara y salidas listas para uso profesional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="instructor">
+    <div class="container">
+      <h2 class="section-title">Quién dicta el curso</h2>
+      <p class="section-sub">Trayectoria académica y profesional en cartografía, ordenamiento territorial y sistemas de información geográfica.</p>
+      <div class="instructor">
+        <div class="avatar"><img src="assets/instructora.png" alt="Camila Paredes Soto"></div>
+        <div>
+          <h3>Camila Paredes Soto</h3>
+          <div class="role">Geógrafa · Especialista SIG</div>
+          <p>Más de 10 años trabajando con QGIS en proyectos de ordenamiento territorial, evaluación
+            ambiental y cartografía base. Ha dictado capacitaciones en universidades y consultoras
+            del sector público y privado.</p>
+          <div class="credentials">
+            <span class="cred">Magíster en Geomática</span>
+            <span class="cred">QGIS · Postgis · GDAL</span>
+            <span class="cred">+10 cohortes dictadas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="modalidades">
+    <div class="container">
+      <h2 class="section-title">Modalidades</h2>
+      <p class="section-sub">Elige la que mejor se ajuste a tu disponibilidad y a tu nivel.</p>
+      <div class="modalidades">
+        <div class="moda">
+          <h3>Online en vivo</h3>
+          <div class="price">Cohorte de 6 semanas</div>
+          <p>Clases sincrónicas dos veces por semana, con grabaciones.</p>
+          <ul>
+            <li>12 sesiones en vivo</li>
+            <li>Material y datasets incluidos</li>
+            <li>Proyecto final con feedback</li>
+            <li>Certificado de aprobación</li>
+          </ul>
+        </div>
+        <div class="moda">
+          <h3>Online a tu ritmo</h3>
+          <div class="price">Acceso 6 meses</div>
+          <p>Mismo contenido grabado, ejercicios autoevaluables.</p>
+          <ul>
+            <li>Acceso a las grabaciones</li>
+            <li>Datasets y guías</li>
+            <li>Foro de consultas</li>
+            <li>Sin proyecto final guiado</li>
+          </ul>
+        </div>
+        <div class="moda">
+          <h3>In-house empresa</h3>
+          <div class="price">A medida</div>
+          <p>Capacitación adaptada para equipos técnicos.</p>
+          <ul>
+            <li>Contenido a medida</li>
+            <li>Sesiones presenciales o remotas</li>
+            <li>Datasets de tu organización</li>
+            <li>Cotización según alcance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <p class="section-sub">Si no encuentras tu respuesta, escríbenos por WhatsApp.</p>
+      <details><summary>¿Necesito experiencia previa con QGIS?</summary><p>No. Empezamos desde la interfaz. Es útil tener manejo básico de planillas y archivos.</p></details>
+      <details><summary>¿Qué computador necesito?</summary><p>Un equipo con 8 GB de RAM es suficiente para los ejercicios. Indicamos cómo instalar QGIS en Windows, macOS y Linux.</p></details>
+      <details><summary>¿Las clases quedan grabadas?</summary><p>Sí. Si pierdes una sesión, puedes verla luego y hacer consultas en el foro.</p></details>
+      <details><summary>¿Entregan certificado?</summary><p>Sí, al aprobar el proyecto final en la modalidad en vivo.</p></details>
+      <details><summary>¿Aceptan boleta o factura?</summary><p>Sí. Indica los datos al momento de inscripción.</p></details>
+    </div>
+  </section>
+
+  <section id="inscripcion">
+    <div class="container">
+      <div class="inscripcion">
+        <div>
+          <h2 class="section-title" style="margin-bottom:6px;">Reserva tu cupo</h2>
+          <p style="color: var(--muted); margin: 0 0 16px;">Completa el formulario y te confirmamos disponibilidad.
+            También puedes escribirnos directo por WhatsApp.</p>
+          <a class="btn btn-green" href="https://wa.me/56992924314?text=Hola%2C%20quiero%20inscribirme%20al%20curso%20de%20QGIS." target="_blank" rel="noopener noreferrer">
+            <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" style="fill:#042e15"><path d="M20.52 3.48A11.92 11.92 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52Z"/></svg>
+            Inscribirme por WhatsApp
+          </a>
+        </div>
+        <form id="form-inscripcion" onsubmit="event.preventDefault(); document.getElementById('ok-msg').classList.add('ok'); this.reset();">
+          <div class="form-row">
+            <label>Nombre completo</label>
+            <input type="text" required placeholder="Tu nombre y apellido">
+          </div>
+          <div class="form-row">
+            <label>Email</label>
+            <input type="email" required placeholder="tu@email.com">
+          </div>
+          <div class="form-row">
+            <label>Modalidad de interés</label>
+            <select>
+              <option>Online en vivo</option>
+              <option>Online a tu ritmo</option>
+              <option>In-house empresa</option>
+            </select>
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">Enviar formulario</button>
+          </div>
+          <div id="ok-msg" class="form-msg">✓ Recibimos tu reserva. Te escribiremos al email indicado en las próximas 24 horas hábiles.</div>
+          <p class="form-note">Al enviar aceptas que te contactemos por correo o WhatsApp respecto a este curso.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="cols">
+        <div>
+          <h4>GeoTaller QGIS</h4>
+          <p>Capacitación técnica en cartografía, SIG y análisis espacial. Cohortes online y formación in-house para empresas.</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p><a href="https://wa.me/56992924314" target="_blank" rel="noopener noreferrer">WhatsApp +56 9 9292 4314</a></p>
+          <p>geotaller@ejemplo.cl</p>
+        </div>
+        <div>
+          <h4>Próxima cohorte</h4>
+          <p>Cupos limitados<br>Inscripción abierta</p>
+        </div>
+      </div>
+      <div class="demo-note">
+        <span>Diseño y desarrollo · <strong>ICTA Digital</strong> — <a href="https://digital.icta.cl/" style="color:inherit;text-decoration:underline">icta.cl</a></span>
+        <a href="/">← Volver al portafolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/56992924314?text=Hola%2C%20me%20interesa%20el%20curso%20de%20QGIS." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.92 11.92 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52Z"/></svg>
+    WhatsApp
+  </a>
+  <a class="back-link" href="/">← Portafolio</a>
+
+</body>
+</html>

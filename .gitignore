@@ -1,0 +1,13 @@
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Archivos temporales de optimización de imágenes
+*.tmp
+optimize-cache/
+
+# Logs locales
+*.log

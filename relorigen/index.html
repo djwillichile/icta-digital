@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; form-action 'self'; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Re·origen — Productos elaborados con materiales reciclados</title>
+<meta name="description" content="Tienda chilena de productos hechos con colillas de cigarro, plástico PET, goma de neumáticos y papel recuperado. Cada producto tiene una historia de origen y un impacto ambiental medible.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f5f0e8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Re·origen — Productos elaborados con materiales reciclados">
+<meta property="og:description" content="Tienda chilena de productos hechos con colillas, PET, neumático y papel recuperado. Cada producto tiene una historia de origen.">
+<meta property="og:image" content="https://digital.icta.cl/relorigen/assets/logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://digital.icta.cl/relorigen/assets/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. TOKENS — paleta kraft + tipografía
+   ============================================================ */
+:root {
+  --bg: #f5f0e8;
+  --bg-2: #ede5d8;
+  --surface: #ffffff;
+  --text: #1c1510;
+  --text-muted: #6b5a45;
+  --text-dim: #9c8a74;
+  --green: #2d6a4f;
+  --green-light: #52b788;
+  --green-dark: #1a3d2a;
+  --earth: #8b5e3c;
+  --line: rgba(28,21,16,0.10);
+  --line-strong: rgba(28,21,16,0.18);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+}
+
+/* ============================================================
+   2. RESET + base
+   ============================================================ */
+* , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body {
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+h1, h2, h3, h4 { font-family: "Playfair Display", Georgia, serif; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+a { color: inherit; text-decoration: none; }
+img, svg { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; border: none; }
+::selection { background: rgba(45,106,79,0.25); color: var(--text); }
+
+/* ============================================================
+   3. BANNER STICKY DEMO
+   ============================================================ */
+.icta-banner {
+  position: sticky; top: 0; z-index: 9999;
+  background: rgba(28,21,16,0.92);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  padding: 8px 20px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; font-size: 12px;
+  color: #d4c5b0;
+  letter-spacing: 0.03em;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.icta-banner .badge {
+  position: relative;
+  background: rgba(82,183,136,0.16);
+  border: 1px solid rgba(82,183,136,0.4);
+  color: var(--green-light);
+  font-size: 10px; font-weight: 600;
+  padding: 3px 10px; border-radius: 999px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.icta-banner .badge::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 999px;
+  background: var(--green-light);
+  opacity: 0;
+  z-index: -1;
+  animation: bannerPulse 2.6s ease-out infinite;
+}
+@keyframes bannerPulse {
+  0%   { transform: scale(1);    opacity: 0.5; }
+  100% { transform: scale(1.45); opacity: 0;   }
+}
+.icta-banner a { color: var(--earth); font-weight: 500; }
+.icta-banner a:hover { text-decoration: underline; }
+
+/* ============================================================
+   4. NAVBAR
+   ============================================================ */
+.nav {
+  position: sticky; top: 36px; z-index: 100;
+  padding: 16px 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.nav.scrolled {
+  background: rgba(245,240,232,0.86);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  box-shadow: 0 1px 0 var(--line), 0 4px 14px rgba(28,21,16,0.05);
+}
+.brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: "Playfair Display", serif;
+  font-weight: 800; font-size: 24px;
+  line-height: 1;
+  letter-spacing: -0.005em;
+}
+.brand .logo-icon {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.brand .logo-icon img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.brand .name-re   { color: var(--green); }
+.brand .name-rest { color: var(--earth); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  font-size: 14px; font-weight: 400; color: var(--text-muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.cart-btn {
+  position: relative;
+  background: none; border: none; padding: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text); transition: color 0.2s;
+}
+.cart-btn:hover { color: var(--green); }
+.cart-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.cart-badge {
+  position: absolute; top: 0; right: 0;
+  min-width: 18px; height: 18px;
+  background: var(--green); color: #fff;
+  border-radius: 999px;
+  font-size: 10px; font-weight: 600;
+  display: grid; place-items: center;
+  padding: 0 5px;
+  border: 2px solid var(--bg);
+  transform: scale(0);
+  transition: transform 0.25s var(--ease);
+}
+.cart-badge.show { transform: scale(1); }
+.btn-back {
+  font-size: 12px; font-weight: 500;
+  padding: 8px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--text-muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-back:hover { border-color: var(--green); color: var(--green); }
+@media (max-width: 880px) {
+  .nav-links { display: none; }
+  .btn-back { display: none; }
+}
+
+/* ============================================================
+   5. BOTONES
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 24px;
+  font-size: 14px; font-weight: 500; font-family: "DM Sans", sans-serif;
+  border-radius: 999px;
+  cursor: pointer; text-decoration: none;
+  transition: transform 0.2s var(--ease), background 0.25s, border-color 0.25s, box-shadow 0.25s;
+  border: 1px solid transparent;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary {
+  background: var(--green); color: #fff;
+  box-shadow: 0 6px 18px -6px rgba(45,106,79,0.55);
+}
+.btn-primary:hover { background: var(--green-light); box-shadow: 0 12px 28px -8px rgba(45,106,79,0.7); }
+.btn-outline {
+  background: transparent; color: var(--earth);
+  border: 1px solid var(--earth);
+}
+.btn-outline:hover { background: var(--earth); color: #fff; }
+
+/* ============================================================
+   6. HERO
+   ============================================================ */
+.hero {
+  position: relative; overflow: hidden;
+  padding: 80px 5% 70px;
+  background:
+    /* Gota de agua sobre kraft (atmosférica, muy sutil) */
+    linear-gradient(180deg, rgba(245,240,232,0.85) 0%, rgba(237,229,216,0.92) 100%),
+    radial-gradient(700px 400px at 80% 10%, rgba(82,183,136,0.18), transparent 60%),
+    radial-gradient(600px 400px at 0% 90%, rgba(139,94,60,0.12), transparent 60%),
+    url("assets/atmosfera-gota-agua.png"),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  background-size: cover, auto, auto, cover, auto;
+  background-position: center, center, center, center, center;
+  background-repeat: no-repeat;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto;
+  position: relative; z-index: 1;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 500;
+  color: var(--green); letter-spacing: 0.08em; text-transform: uppercase;
+  background: rgba(45,106,79,0.08);
+  border: 1px solid rgba(45,106,79,0.18);
+  padding: 6px 14px; border-radius: 999px;
+  margin-bottom: 22px;
+}
+.hero-eyebrow::before { content: "♻"; font-size: 14px; }
+.hero h1 {
+  font-size: clamp(36px, 5.5vw, 64px);
+  margin-bottom: 22px;
+  max-width: 880px; margin-left: auto; margin-right: auto;
+}
+.hero-sub {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--text-muted); max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.65;
+  font-weight: 300;
+}
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  margin-top: 64px; max-width: 720px; margin-left: auto; margin-right: auto;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(26px, 3.5vw, 36px); font-weight: 800;
+  color: var(--green); line-height: 1; display: block;
+}
+.stat-num small { font-size: 0.6em; font-weight: 400; opacity: 0.7; }
+.stat-lbl {
+  font-size: 11.5px; color: var(--text-muted);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-top: 8px; display: block;
+}
+@media (max-width: 600px) {
+  .hero-stats { grid-template-columns: 1fr; gap: 18px; }
+}
+
+/* ============================================================
+   7. SECCIONES
+   ============================================================ */
+section { padding: 80px 5%; position: relative; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-head { text-align: center; margin-bottom: 48px; }
+.section-eyebrow {
+  display: inline-block; font-size: 11.5px; font-weight: 500;
+  color: var(--green); letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title { font-size: clamp(28px, 3.6vw, 40px); margin-bottom: 14px; }
+.section-sub { font-size: 15.5px; color: var(--text-muted); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+/* ============================================================
+   8. FILTROS DE CATEGORÍA
+   ============================================================ */
+.tienda { background: var(--bg); }
+.filters {
+  display: flex; gap: 10px; justify-content: center; flex-wrap: nowrap;
+  margin-bottom: 36px; padding: 4px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.filters::-webkit-scrollbar { display: none; }
+.filter-pill {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px; font-weight: 500;
+  padding: 9px 18px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.25s var(--ease), color 0.25s, border-color 0.25s, transform 0.2s;
+}
+.filter-pill:hover { border-color: var(--green); transform: translateY(-1px); }
+.filter-pill.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+/* ============================================================
+   9. CATÁLOGO
+   ============================================================ */
+.catalog {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+  max-width: 1100px; margin: 0 auto;
+}
+.catalog-extra {
+  max-height: 0; opacity: 0; overflow: hidden; margin-top: 0;
+  transition: max-height 0.7s var(--ease), opacity 0.6s var(--ease), margin-top 0.5s var(--ease);
+}
+.catalog-extra.expanded { max-height: 8000px; opacity: 1; margin-top: 22px; }
+
+.product-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s, opacity 0.35s, scale 0.35s;
+}
+.product-card.hidden-by-filter {
+  opacity: 0; transform: scale(0.96); pointer-events: none;
+  position: absolute; visibility: hidden;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(45,106,79,0.32);
+  box-shadow: 0 18px 40px -16px rgba(28,21,16,0.18);
+}
+.product-thumb {
+  height: 220px; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; justify-content: flex-start;
+  padding: 14px;
+}
+.product-thumb::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.18) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+/* Imagen real del producto sobre el gradiente del material */
+.product-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.5s var(--ease);
+}
+.product-card:hover .product-img { transform: scale(1.04); }
+/* Cuando la card tiene imagen, atenuar el overlay para que se vea bien */
+.product-thumb.has-img::after {
+  background: linear-gradient(180deg, transparent 65%, rgba(0,0,0,0.12) 100%);
+}
+.thumb-mat-colillas { background: linear-gradient(135deg, #3d2806, #8B5E2C); }
+.thumb-mat-pet      { background: linear-gradient(135deg, #0a2e1a, #2d6a4f); }
+.thumb-mat-neumatico{ background: linear-gradient(135deg, #1a1a1a, #3d3d3d); }
+.thumb-mat-papel    { background: linear-gradient(135deg, #3d2e1a, #7a5c3a); }
+.thumb-mat-mixto    { background: linear-gradient(135deg, #1a2e1a, #2d6a4f); }
+.thumb-icon {
+  position: relative; z-index: 2;
+  font-family: "Playfair Display", serif;
+  font-size: 64px; font-weight: 800; line-height: 1;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: -0.04em;
+}
+.product-body {
+  padding: 18px 20px 20px;
+  flex: 1;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.product-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  font-size: 10px; font-weight: 500;
+  padding: 3px 9px; border-radius: 999px;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  background: rgba(28,21,16,0.05); color: var(--text-muted);
+  border: 1px solid var(--line);
+}
+.tag.tag-mat { background: rgba(45,106,79,0.08); color: var(--green); border-color: rgba(45,106,79,0.22); }
+.product-name {
+  font-family: "Playfair Display", serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--text); line-height: 1.25;
+}
+.product-impact {
+  font-size: 12px; color: var(--green);
+  display: flex; flex-direction: column; gap: 2px;
+  background: rgba(45,106,79,0.05);
+  padding: 8px 12px; border-radius: 8px;
+  border-left: 2px solid var(--green-light);
+}
+.product-impact .impact-line {
+  display: flex; align-items: center; gap: 5px;
+}
+.product-impact .impact-line::before { content: "♻"; font-size: 11px; }
+.product-impact .impact-water { color: var(--earth); font-weight: 500; }
+.product-impact .impact-water::before { content: "💧"; font-size: 11px; margin-right: 4px; }
+.product-impact .impact-line.impact-water::before { content: "💧"; }
+.product-bottom {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.product-price {
+  font-family: "Playfair Display", serif;
+  font-size: 19px; font-weight: 800;
+  color: var(--text);
+}
+.btn-add {
+  background: var(--green); color: #fff;
+  font-size: 12px; font-weight: 500;
+  padding: 9px 14px;
+  border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-add:hover { background: var(--green-light); transform: translateY(-1px); }
+.btn-add svg { width: 14px; height: 14px; }
+
+.expand-wrap { text-align: center; margin-top: 36px; }
+.btn-expand {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid rgba(45,106,79,0.4);
+  padding: 12px 26px;
+  font-size: 14px; font-weight: 500;
+  border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.btn-expand:hover { background: rgba(45,106,79,0.06); border-color: var(--green); transform: translateY(-1px); }
+.btn-expand .chev { transition: transform 0.3s var(--ease); }
+.btn-expand.is-open .chev { transform: rotate(180deg); }
+
+@media (max-width: 880px) { .catalog { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .catalog { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   10. HISTORIA
+   ============================================================ */
+.historia { background: var(--bg-2); }
+.historia-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;
+}
+.historia-text p { color: var(--text-muted); font-size: 16px; line-height: 1.75; margin-bottom: 18px; }
+.historia-text p:last-of-type { margin-bottom: 0; }
+.valores { display: grid; gap: 18px; margin-top: 28px; }
+.valor { display: flex; gap: 14px; align-items: flex-start; }
+.valor-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(45,106,79,0.1);
+  border: 1px solid rgba(45,106,79,0.22);
+  display: grid; place-items: center; flex-shrink: 0;
+  color: var(--green);
+}
+.valor-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.valor h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+.valor p { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+.historia-svg { display: grid; place-items: center; }
+.historia-svg svg { width: 80%; max-width: 320px; height: auto; }
+.historia-image {
+  position: relative; overflow: hidden;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px -20px rgba(28,21,16,0.18);
+  aspect-ratio: 4/3;
+}
+.historia-image img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.6s var(--ease);
+}
+.historia-image:hover img { transform: scale(1.03); }
+@media (max-width: 880px) {
+  .historia-grid { grid-template-columns: 1fr; gap: 36px; }
+  .historia-svg { order: -1; }
+  .historia-svg svg { max-width: 220px; }
+}
+
+/* ============================================================
+   10b. EL TALLER (mini-sección cinematográfica)
+   ============================================================ */
+.taller-section { padding: 0; }
+.taller-card {
+  position: relative;
+  width: 100%;
+  height: clamp(380px, 60vh, 560px);
+  overflow: hidden;
+}
+.taller-card img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 8s ease-out;
+}
+.taller-card.visible img { transform: scale(1.04); }
+.taller-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6% 8%;
+  background: linear-gradient(
+    90deg,
+    rgba(28,21,16,0.78) 0%,
+    rgba(28,21,16,0.55) 45%,
+    rgba(28,21,16,0.10) 75%,
+    transparent 100%
+  );
+}
+.taller-overlay .section-eyebrow {
+  color: var(--green-light);
+  margin-bottom: 16px;
+  letter-spacing: 0.22em;
+}
+.taller-quote {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(20px, 2.6vw, 32px);
+  font-weight: 700;
+  font-style: italic;
+  color: #f5f0e8;
+  max-width: 560px;
+  line-height: 1.3;
+  position: relative;
+  padding-left: 22px;
+  border-left: 3px solid var(--earth);
+}
+@media (max-width: 760px) {
+  .taller-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(28,21,16,0.35) 0%,
+      rgba(28,21,16,0.78) 60%,
+      rgba(28,21,16,0.92) 100%
+    );
+    justify-content: flex-end;
+    padding: 32px 24px;
+  }
+  .taller-quote { font-size: 18px; }
+}
+
+/* ============================================================
+   11. IMPACTO ACUMULADO
+   ============================================================ */
+.impacto {
+  background: var(--green-dark);
+  color: #fff;
+  text-align: center;
+}
+.impacto h2 { color: #fff; margin-bottom: 10px; }
+.impacto-sub { color: rgba(255,255,255,0.78); margin-bottom: 56px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.impacto-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 920px; margin: 0 auto; }
+.impacto-stat .num {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(28px, 4vw, 42px); font-weight: 800;
+  color: var(--green-light); line-height: 1; display: block;
+}
+.impacto-stat .lbl {
+  font-size: 12px; color: rgba(255,255,255,0.7);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 10px; display: block;
+}
+@media (max-width: 880px) { .impacto-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; } }
+@media (max-width: 480px) { .impacto-grid { grid-template-columns: 1fr; gap: 22px; } }
+
+/* ============================================================
+   12. FORMULARIO PERSONALIZADO
+   ============================================================ */
+.custom { background: var(--bg-2); }
+.custom-form {
+  max-width: 620px; margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 36px;
+  box-shadow: 0 16px 40px -20px rgba(28,21,16,0.12);
+}
+.field { margin-bottom: 18px; }
+.field label {
+  display: block;
+  font-size: 13px; font-weight: 500;
+  color: var(--text); margin-bottom: 6px;
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  font-family: inherit; font-size: 14px;
+  padding: 11px 14px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.12);
+}
+.btn-submit {
+  width: 100%;
+  background: var(--green); color: #fff;
+  padding: 13px 20px;
+  font-size: 14px; font-weight: 500;
+  border-radius: var(--r-sm);
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-submit:hover { background: var(--green-light); transform: translateY(-1px); }
+@media (max-width: 600px) { .custom-form { padding: 28px 22px; } }
+
+/* ============================================================
+   13. FOOTER
+   ============================================================ */
+footer {
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  padding: 44px 5% 28px;
+}
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-grid {
+  display: flex; gap: 32px; justify-content: space-between;
+  flex-wrap: wrap; margin-bottom: 28px;
+}
+.footer-brand .brand { margin-bottom: 12px; }
+.footer-brand p { font-size: 13px; color: var(--text-muted); max-width: 260px; line-height: 1.55; }
+.footer-col h5 {
+  font-family: "Playfair Display", serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--text); margin-bottom: 14px;
+  letter-spacing: 0.04em;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col a {
+  font-size: 13px; color: var(--text-muted); transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--green); }
+.footer-bottom {
+  border-top: 1px solid var(--line); padding-top: 20px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  font-size: 12px; color: var(--text-dim);
+}
+.footer-bottom a { color: var(--earth); }
+.footer-bottom a:hover { text-decoration: underline; }
+
+/* ============================================================
+   14. WHATSAPP FLOTANTE
+   ============================================================ */
+.wa-float {
+  position: fixed; right: 20px; bottom: 20px; z-index: 9998;
+  background: #25D366; color: #fff;
+  border-radius: 999px;
+  padding: 14px 20px;
+  font-size: 14px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 10px;
+  box-shadow: 0 8px 28px -6px rgba(37,211,102,0.5);
+  text-decoration: none;
+  transition: box-shadow 0.25s var(--ease);
+}
+.wa-float::before {
+  content: ""; position: absolute; inset: 0;
+  border-radius: 999px;
+  background: #25D366;
+  z-index: -1;
+  opacity: 0;
+  animation: waPulse 2.8s ease-out infinite;
+}
+@keyframes waPulse {
+  0%   { transform: scale(1);    opacity: 0.55; }
+  100% { transform: scale(1.5);  opacity: 0;    }
+}
+.wa-float:hover { box-shadow: 0 14px 40px -8px rgba(37,211,102,0.6); }
+.wa-float svg { width: 20px; height: 20px; fill: currentColor; }
+@media (max-width: 480px) {
+  .wa-float { padding: 14px; right: 16px; bottom: 16px; }
+  .wa-float .wa-label { display: none; }
+}
+
+/* ============================================================
+   15. PANEL CARRITO
+   ============================================================ */
+.cart-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(28,21,16,0.55);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+}
+.cart-overlay.open { opacity: 1; pointer-events: auto; }
+.cart-panel {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 420px; max-width: 92vw;
+  z-index: 10000;
+  background: var(--surface);
+  box-shadow: -20px 0 50px -10px rgba(28,21,16,0.25);
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease);
+  display: flex; flex-direction: column;
+}
+.cart-panel.open { transform: translateX(0); }
+.cart-header {
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cart-header h3 { font-size: 22px; }
+.cart-close {
+  background: none; border: none; padding: 6px;
+  color: var(--text-muted);
+  display: grid; place-items: center;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.cart-close:hover { background: var(--bg); color: var(--text); }
+.cart-close svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+.cart-body {
+  flex: 1; overflow-y: auto;
+  padding: 16px 24px;
+}
+.cart-empty {
+  text-align: center; padding: 60px 20px;
+  color: var(--text-muted);
+}
+.cart-empty .empty-icon {
+  font-size: 48px; opacity: 0.3; margin-bottom: 14px;
+}
+.cart-item {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cart-item:last-child { border-bottom: none; }
+.cart-item-name {
+  font-family: "Playfair Display", serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.cart-item-impact {
+  font-size: 11px; color: var(--green);
+  margin-bottom: 8px;
+}
+.cart-item-impact::before { content: "♻ "; }
+.cart-item-controls {
+  display: flex; align-items: center; gap: 8px;
+}
+.qty-btn {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: 14px; font-weight: 600;
+  display: grid; place-items: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+.qty-btn:hover { background: var(--green); color: #fff; border-color: var(--green); }
+.qty-val { font-size: 13px; font-weight: 600; min-width: 20px; text-align: center; }
+.cart-item-side {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+  white-space: nowrap;
+}
+.cart-item-price {
+  font-family: "Playfair Display", serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--text);
+}
+.cart-item-remove {
+  background: none; border: none;
+  font-size: 11px; color: var(--text-dim);
+  text-decoration: underline; cursor: pointer;
+}
+.cart-item-remove:hover { color: #b91c1c; }
+.cart-summary {
+  padding: 18px 24px 0;
+  border-top: 1px solid var(--line);
+}
+.cart-impact-summary {
+  background: rgba(45,106,79,0.08);
+  border: 1px solid rgba(45,106,79,0.18);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  font-size: 13px; color: var(--green);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.cart-impact-summary strong { font-weight: 700; }
+.cart-total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 18px;
+}
+.cart-total .lbl { font-size: 13px; color: var(--text-muted); }
+.cart-total .val {
+  font-family: "Playfair Display", serif;
+  font-size: 26px; font-weight: 800;
+  color: var(--text);
+}
+.cart-actions {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 0 24px 24px;
+}
+.cart-actions .btn-checkout {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 14px; font-weight: 600;
+  border-radius: var(--r-sm);
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+  border: none; cursor: pointer; font-family: inherit;
+}
+.btn-mp {
+  background: #009ee3; color: #fff;
+  box-shadow: 0 6px 18px -6px rgba(0,158,227,0.5);
+}
+.btn-mp:hover { background: #007fb6; transform: translateY(-1px); }
+.btn-mp svg { width: 18px; height: 18px; }
+.btn-wa {
+  background: #25D366; color: #fff;
+  box-shadow: 0 6px 18px -6px rgba(37,211,102,0.55);
+}
+.btn-wa:hover { background: #1faa55; transform: translateY(-1px); }
+.btn-wa svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ============================================================
+   16. MODAL MERCADO PAGO
+   ============================================================ */
+.mp-modal-overlay {
+  position: fixed; inset: 0; z-index: 11000;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.mp-modal-overlay.open { display: flex; animation: mpFadeIn 0.25s ease; }
+@keyframes mpFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.mp-modal {
+  background: var(--surface);
+  border-radius: 16px;
+  max-width: 480px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  padding: 32px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.5);
+  animation: mpSlideUp 0.3s var(--ease);
+}
+@keyframes mpSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mp-modal-head {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+}
+.mp-logo {
+  width: 44px; height: 44px;
+  background: #009ee3; border-radius: 10px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.mp-logo svg { width: 26px; height: 26px; }
+.mp-modal-head h3 { font-size: 19px; margin: 0; }
+.mp-modal-head p { font-size: 12.5px; color: var(--text-muted); margin: 2px 0 0; }
+.mp-block { margin-bottom: 20px; }
+.mp-block h4 { font-family: "DM Sans", sans-serif; font-size: 13px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+.mp-summary {
+  background: var(--bg);
+  border-radius: var(--r-md);
+  padding: 16px;
+}
+.mp-summary-item {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 14px; padding: 6px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.mp-summary-item:last-of-type { border-bottom: none; padding-bottom: 8px; }
+.mp-summary-item .name { color: var(--text); flex: 1; padding-right: 10px; }
+.mp-summary-item .qty { color: var(--text-muted); font-size: 12px; margin: 0 8px; }
+.mp-summary-item .val { font-weight: 600; color: var(--text); }
+.mp-summary-impact {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba(45,106,79,0.08);
+  border-radius: 8px;
+  font-size: 12.5px; color: var(--green);
+  border-left: 2px solid var(--green-light);
+}
+.mp-summary-impact::before { content: "♻ "; }
+.mp-summary-total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.mp-summary-total .lbl { font-size: 13px; color: var(--text-muted); }
+.mp-summary-total .val {
+  font-family: "Playfair Display", serif;
+  font-size: 22px; font-weight: 800; color: var(--text);
+}
+.mp-message {
+  background: rgba(0,158,227,0.06);
+  border: 1px solid rgba(0,158,227,0.2);
+  border-radius: var(--r-md);
+  padding: 16px;
+  font-size: 13.5px; line-height: 1.6;
+  color: var(--text);
+}
+.mp-message strong { color: #007fb6; }
+.mp-actions { display: flex; flex-direction: column; gap: 10px; }
+.mp-actions .btn { width: 100%; }
+.btn-wa-modal {
+  background: #25D366; color: #fff; border: none;
+  padding: 13px 20px;
+  border-radius: var(--r-sm);
+  font-size: 14px; font-weight: 600; font-family: inherit;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-wa-modal:hover { background: #1faa55; transform: translateY(-1px); }
+.btn-mp-close {
+  background: transparent; color: var(--green);
+  border: 1px solid var(--green);
+  padding: 12px 20px;
+  border-radius: var(--r-sm);
+  font-size: 13px; font-weight: 500; font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-mp-close:hover { background: var(--green); color: #fff; }
+.mp-foot {
+  margin-top: 16px; text-align: center;
+  font-size: 12px; color: var(--text-dim);
+}
+.mp-foot a { color: var(--green); font-weight: 500; }
+.mp-foot a:hover { text-decoration: underline; }
+
+/* ============================================================
+   17. SCROLL REVEAL
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal[data-delay="1"].visible { transition-delay: 0.08s; }
+.reveal[data-delay="2"].visible { transition-delay: 0.16s; }
+.reveal[data-delay="3"].visible { transition-delay: 0.24s; }
+.reveal[data-delay="4"].visible { transition-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     BANNER STICKY DEMO
+     ============================================================ -->
+<div class="icta-banner">
+  <span class="badge">Demo activa</span>
+  Desarrollado por <a href="https://icta.cl" target="_blank" rel="noopener">ICTA Ltda.</a>
+  &nbsp;·&nbsp; Proyecto de demostración &nbsp;·&nbsp;
+  <a href="https://digital.icta.cl" target="_blank" rel="noopener">digital.icta.cl</a>
+</div>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav class="nav" id="navbar">
+  <a href="#" class="brand">
+    <span class="logo-icon" aria-hidden="true">
+      <img src="assets/logo.png" alt="Re·origen" loading="eager">
+    </span>
+    <span class="brand-text">
+      <span class="name-re">Re</span><span class="name-rest">·origen</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#tienda">Tienda</a></li>
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#impacto">Impacto</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="cart-btn" id="cart-btn" aria-label="Abrir carrito">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-badge" id="cart-badge">0</span>
+    </button>
+    <a href="/" class="btn-back">← ICTA Digital</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow reveal">Tienda de productos reciclados · Chile</span>
+    <h1 class="reveal" data-delay="1">Transformamos residuos en objetos que duran.</h1>
+    <p class="hero-sub reveal" data-delay="2">
+      Cada producto tiene una historia de origen. Fabricamos en Chile con
+      colillas de cigarro, plástico PET, goma de neumáticos y papel recuperado.
+    </p>
+    <div class="hero-actions reveal" data-delay="3">
+      <a href="#tienda" class="btn btn-primary">Ver tienda →</a>
+      <a href="#historia" class="btn btn-outline">Nuestra historia</a>
+    </div>
+    <div class="hero-stats reveal" data-delay="4">
+      <div class="stat">
+        <span class="stat-num">+<span class="cv" data-target="12000">0</span></span>
+        <span class="stat-lbl">Colillas recicladas</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num"><span class="cv" data-target="8">0</span> <small>ton</small></span>
+        <span class="stat-lbl">Residuos transformados</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num"><span class="cv" data-target="100">0</span>%</span>
+        <span class="stat-lbl">Fabricado en Chile</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TIENDA: filtros + catálogo
+     ============================================================ -->
+<section class="tienda" id="tienda">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Catálogo</span>
+      <h2 class="section-title">Productos con origen</h2>
+      <p class="section-sub">Cada pieza es única y cuenta su historia. Filtra por categoría para encontrar lo que buscas.</p>
+    </div>
+
+    <div class="filters reveal" id="filters">
+      <button class="filter-pill active" data-cat="todos">Todos</button>
+      <button class="filter-pill" data-cat="Accesorios">Accesorios</button>
+      <button class="filter-pill" data-cat="Hogar">Hogar</button>
+      <button class="filter-pill" data-cat="Papelería">Papelería</button>
+    </div>
+
+    <div class="catalog" id="catalog-main"></div>
+    <div class="catalog catalog-extra" id="catalog-extra" aria-hidden="true"></div>
+
+    <div class="expand-wrap">
+      <button class="btn-expand" id="expand-btn" aria-expanded="false" aria-controls="catalog-extra">
+        <span class="lbl">Ver los 8 productos restantes</span>
+        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HISTORIA
+     ============================================================ -->
+<section class="historia" id="historia">
+  <div class="section-inner">
+    <div class="historia-grid">
+      <div class="historia-text reveal">
+        <span class="section-eyebrow">Nuestra historia</span>
+        <h2 class="section-title" style="text-align:left">¿Qué pasa con lo que botamos?</h2>
+        <p>Re·origen nació de una pregunta simple: ¿qué pasa con lo que botamos? Trabajamos con
+          recolectores, recicladores de base y artesanos chilenos para transformar colillas, botellas,
+          neumáticos y papel en objetos útiles y duraderos.</p>
+        <p>Cada producto es diferente. Cada uno tiene un origen real.</p>
+        <div class="valores">
+          <div class="valor">
+            <div class="valor-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg>
+            </div>
+            <div>
+              <h4>Trazabilidad</h4>
+              <p>Sabemos de dónde viene cada material que usamos.</p>
+            </div>
+          </div>
+          <div class="valor">
+            <div class="valor-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 21V8a2 2 0 012-2h2V3h10v3h2a2 2 0 012 2v13"/><path d="M9 21V11h6v10"/></svg>
+            </div>
+            <div>
+              <h4>Fabricación local</h4>
+              <p>Hecho en Chile, con manos chilenas, con artesanos colaboradores.</p>
+            </div>
+          </div>
+          <div class="valor">
+            <div class="valor-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+            </div>
+            <div>
+              <h4>Impacto medible</h4>
+              <p>Cada compra tiene un número real detrás. Sin promesas vagas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="historia-image reveal" data-delay="1">
+        <img src="assets/taller-artesania-historia.png" alt="Taller de artesanía Re·origen" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     IMPACTO ACUMULADO
+     ============================================================ -->
+<section class="impacto" id="impacto">
+  <div class="section-inner">
+    <span class="section-eyebrow" style="color:#52b788">Impacto acumulado</span>
+    <h2 class="section-title">Números reales detrás de cada compra</h2>
+    <p class="impacto-sub">Desde que abrimos, esto es lo que ha pasado con los residuos que llegaron a nuestras manos.</p>
+    <div class="impacto-grid reveal">
+      <div class="impacto-stat">
+        <span class="num">+<span class="cv" data-target="12000">0</span></span>
+        <span class="lbl">Colillas recicladas</span>
+      </div>
+      <div class="impacto-stat">
+        <span class="num"><span class="cv" data-target="8">0</span> <small style="font-size:0.6em;font-weight:400">ton</small></span>
+        <span class="lbl">Residuos transformados</span>
+      </div>
+      <div class="impacto-stat">
+        <span class="num">+<span class="cv" data-target="2400000">0</span></span>
+        <span class="lbl">L de agua protegidos</span>
+      </div>
+      <div class="impacto-stat">
+        <span class="num"><span class="cv" data-target="47">0</span></span>
+        <span class="lbl">Artesanos colaboradores</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EL TALLER (mini-sección cinematográfica)
+     ============================================================ -->
+<section class="taller-section" id="taller">
+  <div class="taller-card reveal">
+    <img src="assets/taller-artesania.png" alt="Taller de artesanía Re·origen — manos trabajando con materiales reciclados" loading="lazy">
+    <div class="taller-overlay">
+      <span class="section-eyebrow">El taller</span>
+      <p class="taller-quote">
+        Cada pieza pasa por las manos de artesanos colaboradores
+        en talleres locales. No fabricamos en serie:
+        cada producto nace del oficio.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCTO PERSONALIZADO
+     ============================================================ -->
+<section class="custom" id="contacto">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Producto a medida</span>
+      <h2 class="section-title">¿Buscas algo específico?</h2>
+      <p class="section-sub">Cuéntanos qué imaginas y lo vemos juntos. Tomamos pedidos especiales y series limitadas.</p>
+    </div>
+
+    <form class="custom-form reveal" id="custom-form">
+      <div class="field">
+        <label for="cf-nombre">Tu nombre</label>
+        <input type="text" id="cf-nombre" name="nombre" required placeholder="Cómo te llamas">
+      </div>
+      <div class="field">
+        <label for="cf-producto">Producto que imaginas</label>
+        <input type="text" id="cf-producto" name="producto" required placeholder="ej. macetero grande, set de oficina...">
+      </div>
+      <div class="field">
+        <label for="cf-material">Material preferido</label>
+        <select id="cf-material" name="material">
+          <option value="Sin preferencia">Sin preferencia</option>
+          <option value="Colillas">Colillas de cigarro</option>
+          <option value="PET">Plástico PET</option>
+          <option value="Neumático">Goma de neumático</option>
+          <option value="Papel">Papel recuperado</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="cf-cantidad">Cantidad aproximada</label>
+        <input type="number" id="cf-cantidad" name="cantidad" min="1" required placeholder="¿Cuántas unidades?">
+      </div>
+      <div class="field">
+        <label for="cf-contacto">Email o teléfono de contacto</label>
+        <input type="text" id="cf-contacto" name="contacto" required placeholder="tu@email.com o +56 9...">
+      </div>
+      <button type="submit" class="btn-submit">
+        Enviar por WhatsApp
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.92 11.92 0 0012 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52z"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <span class="logo-icon" aria-hidden="true">
+            <img src="assets/logo.png" alt="Re·origen" loading="lazy">
+          </span>
+          <span class="brand-text">
+            <span class="name-re">Re</span><span class="name-rest">·origen</span>
+          </span>
+        </a>
+        <p>Productos chilenos hechos con materiales reciclados. Cada compra tiene un origen y un impacto medible.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Tienda</h5>
+        <ul>
+          <li><a href="#tienda">Catálogo</a></li>
+          <li><a href="#historia">Historia</a></li>
+          <li><a href="#impacto">Impacto</a></li>
+          <li><a href="#contacto">Producto a medida</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://wa.me/56992924314" target="_blank" rel="noopener">WhatsApp +56 9 9292 4314</a></li>
+          <li><a href="#">@reorigenstore</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Re·origen · Todos los derechos reservados</p>
+      <p>Tienda demostrativa desarrollada por <a href="https://icta.cl" target="_blank" rel="noopener">ICTA Ltda.</a> · <a href="https://digital.icta.cl" target="_blank" rel="noopener">digital.icta.cl</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     WHATSAPP FLOTANTE
+     ============================================================ -->
+<a class="wa-float" href="https://wa.me/56992924314?text=Hola%20Re%C2%B7origen%2C%20me%20interesan%20sus%20productos." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.92 11.92 0 0012 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52ZM12 22c-1.86 0-3.69-.5-5.29-1.45l-.38-.22-3.67.96.98-3.58-.25-.37A9.94 9.94 0 012 12c0-5.51 4.49-10 10-10s10 4.49 10 10-4.49 10-10 10Zm5.4-7.46c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.67-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.62.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.34Z"/></svg>
+  <span class="wa-label">WhatsApp</span>
+</a>
+
+<!-- ============================================================
+     PANEL CARRITO + OVERLAY
+     ============================================================ -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-panel" id="cart-panel" aria-label="Carrito de compras">
+  <div class="cart-header">
+    <h3>Tu carrito</h3>
+    <button class="cart-close" id="cart-close" aria-label="Cerrar carrito">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-summary" id="cart-summary" style="display:none;">
+    <div class="cart-impact-summary" id="cart-impact-summary"></div>
+    <div class="cart-total">
+      <span class="lbl">Total</span>
+      <span class="val" id="cart-total-val">$0</span>
+    </div>
+  </div>
+  <div class="cart-actions" id="cart-actions" style="display:none;">
+    <button class="btn-checkout btn-mp" id="btn-mp">
+      <svg viewBox="0 0 24 24" fill="#fff"><path d="M2 12l3-2 4 5 9-10 4 3-13 14z"/></svg>
+      Pagar con Mercado Pago
+    </button>
+    <button class="btn-checkout btn-wa" id="btn-wa">
+      <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.92 11.92 0 0012 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52z"/></svg>
+      Coordinar por WhatsApp →
+    </button>
+  </div>
+</aside>
+
+<!-- ============================================================
+     MODAL MERCADO PAGO
+     ============================================================ -->
+<div class="mp-modal-overlay" id="mp-modal-overlay">
+  <div class="mp-modal" role="dialog" aria-modal="true" aria-labelledby="mp-title">
+    <div class="mp-modal-head">
+      <div class="mp-logo">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M2 12l3-2 4 5 9-10 4 3-13 14z"/></svg>
+      </div>
+      <div>
+        <h3 id="mp-title">Mercado Pago</h3>
+        <p>Resumen del pedido</p>
+      </div>
+    </div>
+
+    <div class="mp-block">
+      <div class="mp-summary" id="mp-summary"></div>
+    </div>
+
+    <div class="mp-block">
+      <div class="mp-message">
+        <strong>Integración lista para activar.</strong> Esta demo muestra el flujo de pago con
+        Mercado Pago. En la versión real, este botón procesa pagos con tarjetas, transferencia y
+        efectivo mediante Checkout Pro. La activación requiere las credenciales del negocio
+        (Public Key + Access Token), configurables en minutos desde el panel de Mercado Pago.
+      </div>
+    </div>
+
+    <div class="mp-actions">
+      <button class="btn-wa-modal" id="mp-go-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M20.52 3.48A11.92 11.92 0 0012 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52z"/></svg>
+        Coordinar por WhatsApp →
+      </button>
+      <button class="btn-mp-close" id="mp-close">Cerrar</button>
+    </div>
+
+    <p class="mp-foot">
+      ¿Eres cliente de ICTA Digital? <a href="/">Activa el pago real →</a>
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="carrito.js"></script>
+<script src="checkout.js"></script>
+</body>
+</html>

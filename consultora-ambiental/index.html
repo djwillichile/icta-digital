@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; form-action 'self'; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Verdara — Consultoría ambiental, agua y territorio</title>
+  <meta name="description" content="Consultora especializada en evaluación ambiental, recursos hídricos, monitoreo y planes de adaptación. Equipo técnico, casos y contacto." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+  <style>
+    :root {
+      --bg: #f7faf9;
+      --panel: #ffffff;
+      --green-900: #064e3b;
+      --green-700: #047857;
+      --green-500: #10b981;
+      --blue-700: #0c4a6e;
+      --blue-500: #0284c7;
+      --ink: #0a1f1a;
+      --muted: #4a625b;
+      --line: #d1ddd8;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.65; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+    h1, h2, h3 { letter-spacing: -0.015em; }
+
+    .top {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(247,250,249,0.93); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .top-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 17px; }
+    .logo-mark {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--green-700), var(--blue-500));
+      color: #fff; display: grid; place-items: center;
+    }
+    .top nav { display: flex; gap: 24px; font-size: 14px; }
+    .top nav a { color: var(--muted); }
+    .top nav a:hover { color: var(--green-900); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 8px; font-weight: 600; font-size: 14px;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .btn-primary { background: var(--green-700); color: #fff; }
+    .btn-primary:hover { background: var(--green-900); transform: translateY(-1px); }
+    .btn-outline { border-color: var(--line); color: var(--ink); }
+    .btn-outline:hover { border-color: var(--green-700); color: var(--green-700); }
+    .btn-light { background: #fff; color: var(--green-900); }
+    @media (max-width: 760px) { .top nav { display: none; } }
+
+    /* HERO */
+    .hero {
+      position: relative; padding: 96px 0 80px; overflow: hidden;
+      background:
+        linear-gradient(135deg, var(--green-900) 0%, var(--blue-700) 100%);
+      color: #ecfdf5;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.18;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6) 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.4) 1px, transparent 1px),
+        radial-gradient(circle at 40% 80%, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 60px 60px, 80px 80px, 100px 100px;
+    }
+    .hero::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 120px;
+      background: linear-gradient(180deg, transparent, var(--bg));
+      pointer-events: none;
+    }
+    .hero-grid { position: relative; display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: center; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; color: #ecfdf5;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      padding: 7px 14px; border-radius: 999px; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(38px, 5.6vw, 62px); line-height: 1.05;
+      margin: 18px 0 16px; font-weight: 700; color: #fff;
+    }
+    .hero p.lead { font-size: 19px; color: rgba(255,255,255,0.85); max-width: 560px; margin: 0 0 28px; }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stats {
+      margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+      max-width: 540px;
+    }
+    .stat {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      padding: 16px; border-radius: 12px;
+    }
+    .stat strong { display: block; font-size: 26px; color: #fff; }
+    .stat span { font-size: 12px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .terrain {
+      position: relative; aspect-ratio: 4/4.4; border-radius: 22px; overflow: hidden;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+    }
+    .terrain svg { width: 100%; height: 100%; }
+    .terrain-tag {
+      position: absolute; left: 18px; top: 18px;
+      background: rgba(255,255,255,0.95); color: var(--green-900);
+      padding: 6px 12px; border-radius: 999px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .terrain-coords {
+      position: absolute; right: 18px; bottom: 18px;
+      background: rgba(0,0,0,0.4); color: #d1fae5;
+      padding: 6px 12px; border-radius: 8px;
+      font-size: 11px; font-family: monospace;
+    }
+    @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } .terrain { max-width: 420px; margin: 0 auto; } }
+
+    section { padding: 80px 0; }
+    .section-title { font-size: clamp(28px, 3.6vw, 40px); margin: 0 0 12px; font-weight: 700; }
+    .section-sub { color: var(--muted); margin: 0 0 36px; max-width: 700px; font-size: 17px; }
+
+    /* SERVICIOS */
+    .servicios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .servicio {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 28px;
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .servicio:hover { transform: translateY(-3px); box-shadow: 0 24px 50px -25px rgba(6,78,59,0.18); }
+    .servicio .icon-wrap {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--green-700), var(--blue-500));
+      color: #fff; display: grid; place-items: center; font-size: 22px; margin-bottom: 16px;
+    }
+    .servicio h3 { margin: 0 0 8px; font-size: 19px; }
+    .servicio p { margin: 0; color: var(--muted); font-size: 14px; }
+    @media (max-width: 880px) { .servicios { grid-template-columns: 1fr; } }
+
+    /* CASOS */
+    .casos { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .caso {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .caso-cover { aspect-ratio: 16/8; position: relative; overflow: hidden; }
+    .caso-cover svg { width: 100%; height: 100%; display: block; }
+    .caso-body { padding: 24px 26px 26px; }
+    .caso .meta { font-size: 12px; color: var(--green-700); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .caso h3 { margin: 6px 0 10px; font-size: 19px; }
+    .caso p { margin: 0; color: var(--muted); font-size: 14px; }
+    .caso .resultado {
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line);
+      display: flex; gap: 18px; flex-wrap: wrap;
+    }
+    .caso .resultado div strong { display: block; color: var(--ink); font-size: 16px; }
+    .caso .resultado div span { font-size: 12px; color: var(--muted); }
+    @media (max-width: 760px) { .casos { grid-template-columns: 1fr; } }
+
+    /* EQUIPO */
+    .equipo { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .persona {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px;
+      text-align: center;
+    }
+    .avatar {
+      width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 12px;
+      background: linear-gradient(135deg, var(--green-700), var(--blue-500));
+      color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 22px;
+    }
+    .persona h4 { margin: 0 0 4px; font-size: 16px; }
+    .persona span { color: var(--muted); font-size: 13px; display: block; margin-bottom: 6px; }
+    .persona p { color: var(--muted); font-size: 13px; margin: 0; }
+    @media (max-width: 880px) { .equipo { grid-template-columns: 1fr 1fr; } }
+
+    /* CONTACTO */
+    .contacto-block {
+      background: linear-gradient(135deg, var(--green-900), var(--blue-700));
+      color: #fff; border-radius: 22px; padding: 50px;
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;
+    }
+    .contacto-block h2 { color: #fff; margin: 0 0 12px; font-size: 32px; }
+    .contacto-block p { color: rgba(255,255,255,0.85); font-size: 17px; margin: 0 0 18px; }
+    .contacto-block form { display: grid; gap: 12px; }
+    .contacto-block input, .contacto-block textarea, .contacto-block select {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      color: #fff; padding: 12px 14px; border-radius: 10px; font-family: inherit; font-size: 14px;
+      outline: none;
+    }
+    .contacto-block input:focus, .contacto-block textarea:focus, .contacto-block select:focus { border-color: var(--green-500); }
+    .contacto-block input::placeholder, .contacto-block textarea::placeholder { color: rgba(255,255,255,0.5); }
+    .contacto-block textarea { resize: vertical; min-height: 80px; }
+    .form-msg { display: none; padding: 10px 12px; border-radius: 8px; font-size: 13px; }
+    .form-msg.ok { display: block; background: rgba(16,185,129,0.18); border: 1px solid var(--green-500); color: #d1fae5; }
+    @media (max-width: 880px) { .contacto-block { grid-template-columns: 1fr; padding: 32px; } }
+
+    footer {
+      padding: 40px 0 28px; background: #021712; color: rgba(255,255,255,0.7); font-size: 14px;
+    }
+    footer .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; margin-bottom: 24px; }
+    footer h4 { margin: 0 0 10px; color: #fff; font-size: 15px; }
+    .demo-note {
+      padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 13px;
+    }
+    .demo-note a { color: var(--green-500); }
+    @media (max-width: 760px) { footer .cols { grid-template-columns: 1fr; } }
+
+    .wa-float {
+      position: fixed; right: 20px; bottom: 20px; z-index: 60;
+      background: #25D366; color: #fff; border-radius: 999px;
+      padding: 13px 18px; font-weight: 700; font-size: 14px;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 16px 40px -10px rgba(37,211,102,0.45);
+    }
+    .wa-icon { width: 20px; height: 20px; fill: #fff; }
+    .back-link {
+      position: fixed; left: 20px; bottom: 20px; z-index: 60;
+      background: rgba(2,23,18,0.92); color: #fff;
+      padding: 10px 14px; border-radius: 999px; font-size: 13px;
+    }
+    .back-link:hover { background: var(--green-700); }
+      /* === Banner sticky de demostración === */
+    .icta-banner {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(10,31,26,0.94);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 12px;
+      color: #cfe0d8;
+      letter-spacing: 0.03em;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(34,197,94,0.2);
+    }
+    .icta-banner .badge {
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.4);
+      color: #4ade80;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: ictaBannerPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes ictaBannerPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      50%      { box-shadow: 0 0 0 4px rgba(0,0,0,0); }
+    }
+    .icta-banner a {
+      color: #7dd3fc;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .icta-banner a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  
+<div class="icta-banner">
+  <span class="badge">Demo activa</span>
+  Desarrollado por <a href="https://icta.cl" target="_blank" rel="noopener">ICTA Ltda.</a>
+  &nbsp;·&nbsp; Proyecto de demostración &nbsp;·&nbsp;
+  <a href="https://digital.icta.cl" target="_blank" rel="noopener">digital.icta.cl</a>
+</div>
+
+<header class="top">
+    <div class="container top-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">V</span>
+        <span>Verdara</span>
+      </a>
+      <nav>
+        <a href="#servicios">Servicios</a>
+        <a href="#casos">Casos</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="btn btn-primary" href="#contacto">Solicitar propuesta</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill">● Consultoría ambiental · Agua y territorio</span>
+        <h1>Datos rigurosos para decisiones ambientales bien informadas.</h1>
+        <p class="lead">Acompañamos a empresas, instituciones y comunidades en evaluación ambiental,
+          gestión hídrica y planes de adaptación. Equipo técnico, metodologías estandarizadas y entregables claros.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contacto">Solicitar propuesta técnica</a>
+          <a class="btn btn-light" href="#casos">Ver casos</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>40+</strong><span>Proyectos</span></div>
+          <div class="stat"><strong>12 años</strong><span>De experiencia</span></div>
+          <div class="stat"><strong>5 regiones</strong><span>Cobertura</span></div>
+        </div>
+      </div>
+      <div class="terrain" aria-hidden="true">
+        <span class="terrain-tag">Cuenca · Análisis</span>
+        <svg viewBox="0 0 400 440" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="bg-sky" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#075985"/>
+              <stop offset="100%" stop-color="#0c4a6e"/>
+            </linearGradient>
+            <linearGradient id="ridge1" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#047857"/>
+              <stop offset="100%" stop-color="#065f46"/>
+            </linearGradient>
+            <linearGradient id="ridge2" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#10b981" stop-opacity="0.85"/>
+              <stop offset="100%" stop-color="#047857" stop-opacity="0.85"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="440" fill="url(#bg-sky)"/>
+          <circle cx="320" cy="80" r="40" fill="#fef3c7" opacity="0.6"/>
+          <path d="M0,260 L60,210 L130,250 L200,180 L270,230 L340,190 L400,220 L400,440 L0,440 Z" fill="url(#ridge1)" opacity="0.95"/>
+          <path d="M0,310 L80,270 L150,300 L220,250 L300,290 L400,260 L400,440 L0,440 Z" fill="url(#ridge2)"/>
+          <path d="M50,360 Q150,340 200,360 T380,360" stroke="#22d3ee" stroke-width="3" fill="none" opacity="0.9"/>
+          <path d="M50,360 Q150,340 200,360 T380,360" stroke="#67e8f9" stroke-width="1" fill="none" opacity="0.6" stroke-dasharray="4 4"/>
+          <circle cx="100" cy="350" r="5" fill="#22d3ee"/>
+          <circle cx="220" cy="358" r="5" fill="#22d3ee"/>
+          <circle cx="320" cy="362" r="5" fill="#22d3ee"/>
+          <text x="100" y="338" font-family="monospace" font-size="9" fill="#ecfdf5" text-anchor="middle">EM-01</text>
+          <text x="220" y="346" font-family="monospace" font-size="9" fill="#ecfdf5" text-anchor="middle">EM-02</text>
+          <text x="320" y="350" font-family="monospace" font-size="9" fill="#ecfdf5" text-anchor="middle">EM-03</text>
+        </svg>
+        <span class="terrain-coords">Cuenca alta · MDT 12m</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" style="background: #fff;">
+    <div class="container">
+      <h2 class="section-title">Áreas de servicio</h2>
+      <p class="section-sub">Acompañamos proyectos desde la línea base hasta el seguimiento post-aprobación,
+        articulando equipo técnico interno y red de especialistas.</p>
+      <div class="servicios">
+        <div class="servicio"><div class="icon-wrap">📋</div><h3>Evaluación ambiental</h3><p>DIA, EIA, RCA, adendas y seguimiento de compromisos. Acompañamiento integral SEA.</p></div>
+        <div class="servicio"><div class="icon-wrap">💧</div><h3>Recursos hídricos</h3><p>Balance hídrico, derechos, calidad de agua, planes de cuenca y gestión de pasivos.</p></div>
+        <div class="servicio"><div class="icon-wrap">🛰</div><h3>Teledetección y SIG</h3><p>Monitoreo satelital, cartografía base, análisis de cambios y generación de capas técnicas.</p></div>
+        <div class="servicio"><div class="icon-wrap">🌿</div><h3>Biodiversidad</h3><p>Líneas de base de flora y fauna, planes de manejo y rescate y relocalización.</p></div>
+        <div class="servicio"><div class="icon-wrap">🌡</div><h3>Adaptación climática</h3><p>Diagnósticos de vulnerabilidad, planes de adaptación, escenarios climáticos.</p></div>
+        <div class="servicio"><div class="icon-wrap">🤝</div><h3>Participación y comunidades</h3><p>Procesos participativos, consultas indígenas y apoyo en relacionamiento territorial.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="casos">
+    <div class="container">
+      <h2 class="section-title">Casos seleccionados</h2>
+      <p class="section-sub">Una muestra de proyectos en los que hemos participado como consultora líder o como parte de equipos multidisciplinarios.</p>
+      <div class="casos">
+
+        <article class="caso">
+          <div class="caso-cover">
+            <svg viewBox="0 0 600 240" preserveAspectRatio="xMidYMid slice">
+              <defs><linearGradient id="c1" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs>
+              <rect width="600" height="240" fill="url(#c1)"/>
+              <path d="M0,180 Q100,140 200,180 T400,180 T600,170 L600,240 L0,240 Z" fill="rgba(255,255,255,0.15)"/>
+              <path d="M0,200 Q150,160 300,200 T600,190 L600,240 L0,240 Z" fill="rgba(255,255,255,0.25)"/>
+              <circle cx="120" cy="80" r="5" fill="#fff"/>
+              <circle cx="220" cy="60" r="4" fill="#fff" opacity="0.8"/>
+              <circle cx="320" cy="100" r="4" fill="#fff" opacity="0.6"/>
+              <circle cx="450" cy="70" r="5" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="caso-body">
+            <span class="meta">Recursos hídricos · Región de Coquimbo</span>
+            <h3>Estudio de balance hídrico para cuenca agrícola</h3>
+            <p>Modelación hidrológica integrada a 12 años, escenarios de cambio climático y propuestas
+              de gestión para usuarios agrícolas y sanitarios.</p>
+            <div class="resultado">
+              <div><strong>14 meses</strong><span>Duración</span></div>
+              <div><strong>3 escenarios</strong><span>Climáticos</span></div>
+              <div><strong>120 km²</strong><span>Área de estudio</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="caso">
+          <div class="caso-cover">
+            <svg viewBox="0 0 600 240" preserveAspectRatio="xMidYMid slice">
+              <defs><linearGradient id="c2" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#047857"/><stop offset="100%" stop-color="#064e3b"/></linearGradient></defs>
+              <rect width="600" height="240" fill="url(#c2)"/>
+              <path d="M0,160 L120,100 L240,150 L360,90 L480,140 L600,110 L600,240 L0,240 Z" fill="rgba(255,255,255,0.15)"/>
+              <path d="M0,200 L150,170 L300,210 L450,180 L600,200 L600,240 L0,240 Z" fill="rgba(255,255,255,0.22)"/>
+              <g stroke="#a7f3d0" stroke-width="1.4" fill="none" opacity="0.7">
+                <path d="M80,70 L120,100"/><path d="M200,80 L240,150"/><path d="M340,60 L360,90"/>
+              </g>
+            </svg>
+          </div>
+          <div class="caso-body">
+            <span class="meta">Evaluación ambiental · Región del Maule</span>
+            <h3>Línea base biótica y propuesta de manejo</h3>
+            <p>Caracterización de flora y fauna en 320 hectáreas, identificación de especies sensibles
+              y diseño de plan de rescate para etapa de obras.</p>
+            <div class="resultado">
+              <div><strong>320 ha</strong><span>Caracterizadas</span></div>
+              <div><strong>4 campañas</strong><span>De terreno</span></div>
+              <div><strong>RCA aprobada</strong><span>2024</span></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="equipo" style="background: #fff;">
+    <div class="container">
+      <h2 class="section-title">Equipo</h2>
+      <p class="section-sub">Profesionales con trayectoria en consultoría privada y servicio público, articulados en equipos por proyecto.</p>
+      <div class="equipo">
+        <div class="persona">
+          <div class="avatar">CR</div>
+          <h4>Carolina Rojas</h4>
+          <span>Directora · Ingeniera Ambiental</span>
+          <p>15 años en evaluación ambiental, líder de proyectos SEA.</p>
+        </div>
+        <div class="persona">
+          <div class="avatar">DM</div>
+          <h4>Diego Moraga</h4>
+          <span>Ing. en Recursos Hídricos</span>
+          <p>Especialista en modelación hidrológica e hidráulica.</p>
+        </div>
+        <div class="persona">
+          <div class="avatar">JS</div>
+          <h4>Javiera Soto</h4>
+          <span>Bióloga · Bd</span>
+          <p>Líneas de base biótica, planes de rescate y monitoreo.</p>
+        </div>
+        <div class="persona">
+          <div class="avatar">MA</div>
+          <h4>Matías Aravena</h4>
+          <span>Especialista SIG · Teledetección</span>
+          <p>Cartografía técnica, análisis multitemporal con GEE.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="container">
+      <div class="contacto-block">
+        <div>
+          <h2>Conversemos sobre tu proyecto</h2>
+          <p>Cuéntanos qué necesitas: diagnóstico, evaluación, monitoreo o asesoría puntual.
+            Te respondemos con un alcance preliminar y plazo estimado en menos de 48 horas hábiles.</p>
+          <a class="btn btn-light" href="https://wa.me/56992924314?text=Hola%20Verdara%2C%20necesito%20una%20propuesta%20t%C3%A9cnica." target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
+        </div>
+        <form onsubmit="event.preventDefault(); document.getElementById('vd-ok').classList.add('ok'); this.reset();">
+          <input type="text" required placeholder="Nombre y organización">
+          <input type="email" required placeholder="Email corporativo">
+          <select>
+            <option>Evaluación ambiental (DIA / EIA)</option>
+            <option>Recursos hídricos</option>
+            <option>Biodiversidad</option>
+            <option>Teledetección y SIG</option>
+            <option>Otro / no estoy seguro</option>
+          </select>
+          <textarea placeholder="Cuéntanos brevemente el contexto"></textarea>
+          <button class="btn btn-light" type="submit">Solicitar contacto</button>
+          <div id="vd-ok" class="form-msg">✓ Recibimos tu solicitud. Te contactaremos en menos de 48 horas hábiles.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="cols">
+        <div>
+          <h4>Verdara</h4>
+          <p>Consultoría ambiental especializada en evaluación, agua, biodiversidad y territorio.
+            Equipo técnico con trayectoria en consultoría y servicio público.</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p><a href="https://wa.me/56992924314" target="_blank" rel="noopener noreferrer" style="color: var(--green-500)">WhatsApp +56 9 9292 4314</a></p>
+          <p>contacto@verdara.cl</p>
+        </div>
+        <div>
+          <h4>Oficina</h4>
+          <p>Providencia · Santiago<br>Lun a vie 09:00 — 18:00</p>
+        </div>
+      </div>
+      <div class="demo-note">
+        <span>Diseño y desarrollo · <strong>ICTA Digital</strong> — <a href="https://digital.icta.cl/" style="color:inherit;text-decoration:underline">icta.cl</a></span>
+        <a href="/">← Volver al portafolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/56992924314?text=Hola%20Verdara%2C%20me%20interesa%20cotizar%20una%20asesor%C3%ADa." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.92 11.92 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52Z"/></svg>
+    WhatsApp
+  </a>
+  <a class="back-link" href="/">← Portafolio</a>
+
+</body>
+</html>

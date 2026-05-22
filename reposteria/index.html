@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; form-action 'self'; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Repostería Almendra — Tortas, postres y dulces para tu día especial</title>
+  <meta name="description" content="Repostería artesanal con catálogo online. Tortas a pedido, mesa dulce, brownies, cupcakes y postres. Despachos en Santiago." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+  <style>
+    :root {
+      --bg: #fef7f3;
+      --paper: #fffdfb;
+      --pink: #f9a8c4;
+      --pink-dark: #e87aa8;
+      --rose: #d4476a;
+      --gold: #c9a06b;
+      --cream: #fdf2e9;
+      --ink: #3d2230;
+      --muted: #8b6878;
+      --line: #f4d9e0;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.65; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 22px; }
+    .serif { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; }
+    h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; letter-spacing: -0.01em; }
+
+    .top {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(254,247,243,0.93); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .top-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 18px; }
+    .logo { display: flex; align-items: center; gap: 12px; font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 24px; }
+    .logo-mark {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--rose));
+      color: #fff; display: grid; place-items: center; font-style: normal;
+      font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 20px;
+      box-shadow: 0 8px 18px -6px rgba(212,71,106,0.4);
+    }
+    .top nav { display: flex; gap: 22px; font-size: 14px; }
+    .top nav a { color: var(--muted); }
+    .top nav a:hover { color: var(--rose); }
+    .top-actions { display: flex; gap: 10px; align-items: center; }
+    .cart-btn {
+      position: relative;
+      background: #fff; border: 1px solid var(--line); border-radius: 999px;
+      width: 42px; height: 42px; display: grid; place-items: center;
+      cursor: pointer; transition: border-color .2s ease;
+      font-size: 18px;
+    }
+    .cart-btn:hover { border-color: var(--pink-dark); }
+    .cart-badge {
+      position: absolute; top: -6px; right: -6px;
+      background: var(--rose); color: #fff;
+      font-size: 11px; font-weight: 700;
+      width: 20px; height: 20px; border-radius: 50%;
+      display: grid; place-items: center;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px; border-radius: 999px; font-weight: 600; font-size: 14px;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .btn-pink { background: var(--rose); color: #fff; }
+    .btn-pink:hover { background: var(--pink-dark); transform: translateY(-1px); }
+    .btn-outline { border-color: var(--rose); color: var(--rose); }
+    .btn-outline:hover { background: var(--rose); color: #fff; }
+    .btn-cream { background: var(--cream); color: var(--ink); }
+    .btn-cream:hover { background: #fff; }
+    @media (max-width: 880px) { .top nav { display: none; } }
+
+    /* HERO */
+    .hero {
+      position: relative; padding: 80px 0 70px; overflow: hidden;
+      background:
+        radial-gradient(800px 500px at 90% 0%, rgba(249,168,196,0.4), transparent 60%),
+        radial-gradient(700px 400px at 0% 100%, rgba(201,160,107,0.18), transparent 60%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: center; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; color: var(--rose);
+      background: #fff; border: 1px solid var(--line);
+      padding: 6px 14px; border-radius: 999px;
+    }
+    .pill::before { content: "✿"; }
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 68px); line-height: 1.05;
+      margin: 18px 0 16px;
+    }
+    .hero h1 em { font-style: italic; color: var(--rose); }
+    .hero p.lead { font-size: 18px; color: var(--muted); max-width: 520px; margin: 0 0 26px; }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-features {
+      margin-top: 28px; display: flex; gap: 22px; flex-wrap: wrap; font-size: 14px; color: var(--muted);
+    }
+    .hero-features div { display: flex; align-items: center; gap: 8px; }
+    .hero-features .dot { color: var(--pink-dark); }
+
+    .cake-art {
+      position: relative; aspect-ratio: 1/1.05; max-width: 480px; margin: 0 auto;
+      filter: drop-shadow(0 30px 50px rgba(212,71,106,0.25));
+    }
+    .cake-art svg { width: 100%; height: 100%; }
+    .price-tag {
+      position: absolute; top: 14%; right: -8%;
+      background: #fff; border: 2px solid var(--rose); border-radius: 50%;
+      width: 110px; height: 110px;
+      display: grid; place-items: center; text-align: center;
+      transform: rotate(8deg);
+      box-shadow: 0 14px 30px -10px rgba(212,71,106,0.35);
+    }
+    .price-tag span { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; display: block; }
+    .price-tag strong { font-family: "Cormorant Garamond", serif; font-style: italic; color: var(--rose); font-size: 24px; line-height: 1; }
+    @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } }
+
+    section { padding: 80px 0; }
+    .section-title { font-size: clamp(30px, 4vw, 46px); margin: 0 0 12px; text-align: center; }
+    .section-title em { font-style: italic; color: var(--rose); }
+    .section-sub { color: var(--muted); margin: 0 auto 40px; max-width: 600px; text-align: center; font-size: 16px; }
+
+    /* CATEGORIAS */
+    .cat-tabs {
+      display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px;
+    }
+    .cat-tab {
+      padding: 10px 22px; border-radius: 999px;
+      background: #fff; border: 1px solid var(--line);
+      font-weight: 600; font-size: 14px; cursor: pointer; color: var(--muted);
+      transition: all .2s ease;
+    }
+    .cat-tab:hover { color: var(--rose); }
+    .cat-tab.active { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+    /* CATALOGO */
+    .productos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .producto {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 18px;
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .producto:hover { transform: translateY(-4px); box-shadow: 0 28px 60px -25px rgba(212,71,106,0.25); }
+    .producto-img { aspect-ratio: 1/1; position: relative; overflow: hidden; }
+    .producto-img svg { width: 100%; height: 100%; }
+    .producto .badge {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(255,255,255,0.95); color: var(--rose);
+      padding: 4px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .producto .badge.new { background: var(--rose); color: #fff; }
+    .producto-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .producto h3 { margin: 0; font-size: 19px; }
+    .producto .desc { color: var(--muted); font-size: 13px; margin: 0; flex: 1; }
+    .producto .precio-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--line);
+    }
+    .precio { font-size: 20px; font-weight: 700; color: var(--rose); font-family: "Cormorant Garamond", serif; }
+    .precio span { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .add-btn {
+      background: var(--rose); color: #fff; border: none; border-radius: 999px;
+      width: 36px; height: 36px; display: grid; place-items: center;
+      cursor: pointer; font-size: 18px; font-weight: 700;
+      transition: background .2s ease, transform .15s ease;
+    }
+    .add-btn:hover { background: var(--pink-dark); transform: scale(1.08); }
+    @media (max-width: 980px) { .productos { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 540px) { .productos { grid-template-columns: 1fr; } }
+
+    /* TORTA A PEDIDO */
+    .pedido-block {
+      background: linear-gradient(135deg, var(--cream) 0%, var(--paper) 100%);
+      border-radius: 22px; padding: 60px 50px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;
+      border: 1px solid var(--line);
+    }
+    .pedido-block h2 { text-align: left; margin: 0 0 12px; font-size: 38px; }
+    .pedido-block p { color: var(--muted); font-size: 17px; }
+    .pedido-block form { display: grid; gap: 12px; }
+    .pedido-block input, .pedido-block select, .pedido-block textarea {
+      background: #fff; border: 1px solid var(--line); color: var(--ink);
+      padding: 12px 14px; border-radius: 10px; font-family: inherit; font-size: 14px;
+      outline: none;
+    }
+    .pedido-block input:focus, .pedido-block select:focus, .pedido-block textarea:focus { border-color: var(--rose); }
+    .pedido-block textarea { resize: vertical; min-height: 90px; }
+    .form-msg { display: none; padding: 12px 14px; border-radius: 10px; font-size: 14px; }
+    .form-msg.ok { display: block; background: rgba(212,71,106,0.1); border: 1px solid var(--rose); color: var(--rose); }
+    @media (max-width: 880px) { .pedido-block { grid-template-columns: 1fr; padding: 36px 26px; } }
+
+    /* COMO COMPRAR */
+    .pasos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .paso {
+      text-align: center; padding: 24px;
+    }
+    .paso-num {
+      width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 14px;
+      background: linear-gradient(135deg, var(--pink), var(--rose));
+      color: #fff; display: grid; place-items: center;
+      font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 26px;
+      box-shadow: 0 12px 30px -10px rgba(212,71,106,0.4);
+    }
+    .paso h4 { margin: 0 0 6px; font-size: 19px; }
+    .paso p { margin: 0; color: var(--muted); font-size: 14px; }
+    @media (max-width: 880px) { .pasos { grid-template-columns: 1fr 1fr; } }
+
+    /* TESTIMONIOS */
+    .testimonios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .testimonio {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 28px;
+    }
+    .stars { color: var(--gold); font-size: 16px; letter-spacing: 2px; margin-bottom: 10px; }
+    .testimonio p { margin: 0 0 14px; color: var(--ink); font-size: 15px; font-style: italic; font-family: "Cormorant Garamond", serif; font-size: 18px; }
+    .testimonio .autor { color: var(--muted); font-size: 13px; }
+    @media (max-width: 880px) { .testimonios { grid-template-columns: 1fr; } }
+
+    /* DESPACHO */
+    .despacho-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .despacho {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 28px;
+      text-align: center;
+    }
+    .despacho .icon {
+      width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 14px;
+      background: linear-gradient(135deg, var(--pink), var(--rose));
+      color: #fff; display: grid; place-items: center; font-size: 24px;
+    }
+    .despacho h4 { margin: 0 0 6px; font-size: 19px; }
+    .despacho p { margin: 0; color: var(--muted); font-size: 14px; }
+    @media (max-width: 880px) { .despacho-grid { grid-template-columns: 1fr; } }
+
+    /* CTA FINAL */
+    .cta-final {
+      background: linear-gradient(135deg, var(--rose) 0%, var(--pink-dark) 100%);
+      color: #fff; border-radius: 22px; padding: 60px 40px;
+      text-align: center;
+    }
+    .cta-final h2 { color: #fff; margin: 0 0 14px; }
+    .cta-final p { color: rgba(255,255,255,0.9); font-size: 17px; max-width: 540px; margin: 0 auto 22px; }
+    .btn-white { background: #fff; color: var(--rose); }
+    .btn-white:hover { background: var(--cream); }
+
+    footer {
+      padding: 50px 0 30px; background: #2d1820; color: rgba(255,255,255,0.75); font-size: 14px;
+    }
+    footer .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 28px; margin-bottom: 28px; }
+    footer h4 { margin: 0 0 12px; color: #fff; font-size: 15px; }
+    footer .brand-foot { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 26px; color: #fff; margin-bottom: 8px; }
+    .demo-note {
+      padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 13px;
+    }
+    .demo-note a { color: var(--pink); }
+    @media (max-width: 880px) { footer .cols { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 540px) { footer .cols { grid-template-columns: 1fr; } }
+
+    .wa-float {
+      position: fixed; right: 20px; bottom: 20px; z-index: 60;
+      background: #25D366; color: #fff; border-radius: 999px;
+      padding: 13px 18px; font-weight: 700; font-size: 14px;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 16px 40px -10px rgba(37,211,102,0.45);
+    }
+    .wa-icon { width: 20px; height: 20px; fill: #fff; }
+    .back-link {
+      position: fixed; left: 20px; bottom: 20px; z-index: 60;
+      background: rgba(45,24,32,0.92); color: #fff;
+      padding: 10px 14px; border-radius: 999px; font-size: 13px;
+    }
+    .back-link:hover { background: var(--rose); }
+
+    /* MINI CART */
+    .mini-cart {
+      position: fixed; right: 20px; top: 80px; width: 320px;
+      background: #fff; border: 1px solid var(--line); border-radius: 18px;
+      padding: 20px; box-shadow: 0 24px 60px -20px rgba(45,24,32,0.3);
+      display: none; z-index: 50;
+    }
+    .mini-cart.show { display: block; }
+    .mini-cart h4 { margin: 0 0 12px; font-size: 18px; }
+    .mini-cart ul { list-style: none; padding: 0; margin: 0 0 12px; }
+    .mini-cart li {
+      display: flex; justify-content: space-between; padding: 8px 0;
+      border-bottom: 1px dashed var(--line); font-size: 14px;
+    }
+    .mini-cart .total {
+      display: flex; justify-content: space-between; font-weight: 700; padding: 10px 0;
+      color: var(--rose);
+    }
+    .mini-cart .empty { color: var(--muted); font-size: 13px; text-align: center; padding: 14px 0; }
+      /* === Banner sticky de demostración === */
+    .icta-banner {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(253,242,233,0.94);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 12px;
+      color: #8b6878;
+      letter-spacing: 0.03em;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(232,122,168,0.22);
+    }
+    .icta-banner .badge {
+      background: rgba(232,122,168,0.16);
+      border: 1px solid rgba(232,122,168,0.42);
+      color: #d4476a;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: ictaBannerPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes ictaBannerPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(232,122,168,0.45); }
+      50%      { box-shadow: 0 0 0 4px rgba(0,0,0,0); }
+    }
+    .icta-banner a {
+      color: #d4476a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .icta-banner a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  
+<div class="icta-banner">
+  <span class="badge">Demo activa</span>
+  Desarrollado por <a href="https://icta.cl" target="_blank" rel="noopener">ICTA Ltda.</a>
+  &nbsp;·&nbsp; Proyecto de demostración &nbsp;·&nbsp;
+  <a href="https://digital.icta.cl" target="_blank" rel="noopener">digital.icta.cl</a>
+</div>
+
+<header class="top">
+    <div class="container top-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">a</span>
+        <span>Repostería Almendra</span>
+      </a>
+      <nav>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#a-pedido">Tortas a pedido</a>
+        <a href="#como">Cómo comprar</a>
+        <a href="#despacho">Despacho</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="top-actions">
+        <button class="cart-btn" id="cart-btn" aria-label="Ver carrito">
+          🛍
+          <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mini-cart" id="mini-cart" aria-live="polite">
+    <h4>Tu carrito</h4>
+    <ul id="cart-list"></ul>
+    <div class="empty" id="cart-empty">Tu carrito está vacío. Agrega algo dulce ✿</div>
+    <div class="total" id="cart-total" style="display:none;"><span>Total</span><span id="total-val">$0</span></div>
+    <button class="btn btn-pink" id="checkout-btn" style="width:100%;justify-content:center;display:none;" onclick="window.location.href='https://wa.me/56992924314?text='+ encodeURIComponent('Hola, quiero pedir: ' + window.cartList())">Continuar por WhatsApp</button>
+  </div>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill">Repostería artesanal · Recibe en Santiago</span>
+        <h1>Hecho con calma, <em>endulzado</em> con cariño.</h1>
+        <p class="lead">Tortas a pedido, mesa dulce, brownies, cupcakes y postres caseros para
+          celebrar tus momentos importantes. Cada pedido se prepara fresco para tu fecha.</p>
+        <div class="hero-cta">
+          <a class="btn btn-pink" href="#catalogo">Ver catálogo</a>
+          <a class="btn btn-outline" href="#a-pedido">Pedir torta personalizada</a>
+        </div>
+        <div class="hero-features">
+          <div><span class="dot">●</span> Pedidos con 48 hrs</div>
+          <div><span class="dot">●</span> Despacho a domicilio</div>
+          <div><span class="dot">●</span> Opciones sin gluten</div>
+        </div>
+      </div>
+      <div class="cake-art" aria-hidden="true">
+        <svg viewBox="0 0 400 420">
+          <defs>
+            <linearGradient id="plate" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#fff"/>
+              <stop offset="100%" stop-color="#f4d9e0"/>
+            </linearGradient>
+            <linearGradient id="cake1" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#f9a8c4"/>
+              <stop offset="100%" stop-color="#e87aa8"/>
+            </linearGradient>
+            <linearGradient id="cake2" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#fef7f3"/>
+              <stop offset="100%" stop-color="#fdf2e9"/>
+            </linearGradient>
+            <linearGradient id="cake3" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#fbc4d8"/>
+              <stop offset="100%" stop-color="#f9a8c4"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="200" cy="380" rx="170" ry="20" fill="rgba(212,71,106,0.15)"/>
+          <ellipse cx="200" cy="370" rx="160" ry="18" fill="url(#plate)" stroke="#f4d9e0" stroke-width="2"/>
+          <rect x="80" y="270" width="240" height="100" rx="8" fill="url(#cake1)"/>
+          <path d="M80,280 Q100,260 120,280 T160,280 T200,280 T240,280 T280,280 T320,280" fill="#fff" stroke="#fff" stroke-width="20" stroke-linejoin="round"/>
+          <rect x="110" y="200" width="180" height="80" rx="6" fill="url(#cake2)"/>
+          <path d="M110,210 Q130,190 150,210 T190,210 T230,210 T270,210 T290,210" fill="url(#cake3)" stroke="url(#cake3)" stroke-width="14" stroke-linejoin="round"/>
+          <rect x="140" y="140" width="120" height="60" rx="4" fill="url(#cake1)"/>
+          <path d="M140,150 Q160,130 180,150 T220,150 T260,150" fill="#fff" stroke="#fff" stroke-width="14" stroke-linejoin="round"/>
+          <g transform="translate(200,80)">
+            <rect x="-3" y="0" width="6" height="50" fill="#fef7f3"/>
+            <ellipse cx="0" cy="0" rx="6" ry="14" fill="#fbbf24"/>
+            <ellipse cx="0" cy="-3" rx="3" ry="8" fill="#fef3c7"/>
+          </g>
+          <circle cx="120" cy="245" r="6" fill="#d4476a"/>
+          <circle cx="200" cy="248" r="5" fill="#d4476a"/>
+          <circle cx="280" cy="245" r="6" fill="#d4476a"/>
+          <circle cx="160" cy="320" r="7" fill="#fef3c7"/>
+          <circle cx="240" cy="320" r="7" fill="#fef3c7"/>
+          <text x="200" y="335" font-family="Cormorant Garamond, Georgia, serif" font-size="24" fill="#fff" text-anchor="middle" font-style="italic">Almendra</text>
+        </svg>
+        <div class="price-tag">
+          <div>
+            <span>Desde</span>
+            <strong>$22.000</strong>
+            <span style="margin-top:4px;">tortas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalogo" style="background: var(--paper);">
+    <div class="container">
+      <h2 class="section-title">Catálogo <em>dulce</em></h2>
+      <p class="section-sub">Productos disponibles del catálogo permanente. Para tortas personalizadas, revisa más abajo el formulario de pedido.</p>
+
+      <div class="cat-tabs">
+        <button class="cat-tab active" data-cat="todos">Todos</button>
+        <button class="cat-tab" data-cat="torta">Tortas</button>
+        <button class="cat-tab" data-cat="cupcake">Cupcakes</button>
+        <button class="cat-tab" data-cat="brownie">Brownies</button>
+        <button class="cat-tab" data-cat="otros">Postres</button>
+      </div>
+
+      <div class="productos" id="productos"></div>
+    </div>
+  </section>
+
+  <section id="a-pedido">
+    <div class="container">
+      <div class="pedido-block">
+        <div>
+          <h2>Tortas a <em style="font-style:italic;color:var(--rose);">pedido</em></h2>
+          <p>Cumpleaños, baby showers, matrimonios o reuniones familiares. Cuéntanos qué celebras
+            y armamos juntos la torta perfecta. Reserva con al menos 5 días de anticipación.</p>
+          <ul style="color:var(--muted);font-size:15px;padding-left:18px;margin:14px 0 0;">
+            <li>Tortas desde 10 personas</li>
+            <li>Sabores y rellenos personalizados</li>
+            <li>Decoración temática (figuras, flores, números)</li>
+            <li>Opciones sin gluten / sin azúcar a pedido</li>
+          </ul>
+        </div>
+        <form onsubmit="event.preventDefault(); document.getElementById('pd-ok').classList.add('ok'); this.reset();">
+          <input type="text" required placeholder="Nombre">
+          <input type="tel" required placeholder="WhatsApp / teléfono">
+          <select>
+            <option>Cumpleaños</option>
+            <option>Baby shower / Revelación</option>
+            <option>Matrimonio</option>
+            <option>Reunión / fiesta</option>
+            <option>Otro</option>
+          </select>
+          <input type="number" min="6" placeholder="Cantidad de personas">
+          <input type="date">
+          <textarea placeholder="Cuéntanos los detalles: sabor, decoración, restricciones..."></textarea>
+          <button class="btn btn-pink" type="submit">Solicitar cotización</button>
+          <div id="pd-ok" class="form-msg">✓ Recibí tu solicitud. Te contactaré por WhatsApp con la cotización en menos de 24 horas.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="como" style="background: var(--paper);">
+    <div class="container">
+      <h2 class="section-title">¿Cómo <em>comprar</em>?</h2>
+      <p class="section-sub">Un proceso simple y cuidado, paso a paso.</p>
+      <div class="pasos">
+        <div class="paso">
+          <div class="paso-num">1</div>
+          <h4>Elige</h4>
+          <p>Agrega productos del catálogo o solicita una torta personalizada con el formulario.</p>
+        </div>
+        <div class="paso">
+          <div class="paso-num">2</div>
+          <h4>Cotiza</h4>
+          <p>Te confirmo disponibilidad y precio final por WhatsApp. Sin compromiso.</p>
+        </div>
+        <div class="paso">
+          <div class="paso-num">3</div>
+          <h4>Reserva</h4>
+          <p>Con un 50% de abono dejamos tu pedido reservado en agenda.</p>
+        </div>
+        <div class="paso">
+          <div class="paso-num">4</div>
+          <h4>Recibe</h4>
+          <p>Despacho a domicilio o retiro en local. Lo entregamos fresco el mismo día.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Lo que dicen las clientas</h2>
+      <p class="section-sub">Reseñas reales de clientas que han pedido tortas y postres.</p>
+      <div class="testimonios">
+        <div class="testimonio">
+          <div class="stars">★★★★★</div>
+          <p>"La torta del cumpleaños número uno de mi hija quedó preciosa. Sabor increíble, todos pidieron repetir."</p>
+          <div class="autor">— Constanza R. · Las Condes</div>
+        </div>
+        <div class="testimonio">
+          <div class="stars">★★★★★</div>
+          <p>"Pedí una mesa dulce para 30 personas. Llegó puntual, todo precioso, y me ahorré un montón de estrés."</p>
+          <div class="autor">— María José L. · Providencia</div>
+        </div>
+        <div class="testimonio">
+          <div class="stars">★★★★★</div>
+          <p>"Los brownies son adictivos. Los pido cada dos semanas para la oficina y siempre se acaban antes del almuerzo."</p>
+          <div class="autor">— Daniela P. · Ñuñoa</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="despacho" style="background: var(--paper);">
+    <div class="container">
+      <h2 class="section-title"><em>Despacho</em> y retiro</h2>
+      <p class="section-sub">Llevamos tu pedido fresco el mismo día. Cobertura en gran parte de Santiago.</p>
+      <div class="despacho-grid">
+        <div class="despacho">
+          <div class="icon">🛵</div>
+          <h4>Despacho a domicilio</h4>
+          <p>Cobertura en RM. Costo se calcula según comuna al confirmar el pedido.</p>
+        </div>
+        <div class="despacho">
+          <div class="icon">🏠</div>
+          <h4>Retiro en local</h4>
+          <p>Coordinamos hora y día por WhatsApp. Sin costo adicional. Comuna de Ñuñoa.</p>
+        </div>
+        <div class="despacho">
+          <div class="icon">📅</div>
+          <h4>Misma fecha</h4>
+          <p>Para que llegue perfecto, los pedidos se entregan en el día acordado, no antes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="container">
+      <div class="cta-final">
+        <h2>¿Tienes una <em style="font-style:italic;">celebración</em> en mente?</h2>
+        <p>Conversemos. Te contestamos rápido por WhatsApp y te ayudamos a armar el pedido perfecto.</p>
+        <a class="btn btn-white" href="https://wa.me/56992924314?text=Hola%20Almendra%2C%20me%20gustar%C3%ADa%20cotizar%20un%20pedido." target="_blank" rel="noopener noreferrer">
+          Escribir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="cols">
+        <div>
+          <div class="brand-foot">Repostería Almendra</div>
+          <p>Repostería artesanal hecha con productos frescos. Pedidos a medida, despacho en Santiago.</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p><a href="https://wa.me/56992924314" target="_blank" rel="noopener noreferrer" style="color:var(--pink)">+56 9 9292 4314</a></p>
+          <p>contacto@reposteriaalmendra.cl</p>
+        </div>
+        <div>
+          <h4>Horario</h4>
+          <p>Lun a Vie · 10–19 hrs<br>Sábado · 10–14 hrs<br>Domingo · cerrado</p>
+        </div>
+        <div>
+          <h4>Síguenos</h4>
+          <p>@reposteriaalmendra<br>Instagram · Facebook · TikTok</p>
+        </div>
+      </div>
+      <div class="demo-note">
+        <span>Diseño y desarrollo · <strong>ICTA Digital</strong> — <a href="https://digital.icta.cl/" style="color:inherit;text-decoration:underline">icta.cl</a></span>
+        <a href="/">← Volver al portafolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/56992924314?text=Hola%20Almendra%2C%20quiero%20cotizar%20un%20pedido." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.92 11.92 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52Z"/></svg>
+    Pedir
+  </a>
+  <a class="back-link" href="/">← Portafolio</a>
+
+  <script>
+  (function () {
+    var productos = [
+      { id: 1, cat: "torta", nombre: "Torta de Chocolate Belga",     desc: "Bizcocho de cacao, ganache y crema de chocolate.",          precio: 28000, unidad: "10 personas", badge: "Top",    color: ["#7a4a2b","#c9a06b"] },
+      { id: 2, cat: "torta", nombre: "Torta de Frutilla y Crema",     desc: "Bizcocho liviano, frutillas frescas y chantilly.",         precio: 26000, unidad: "10 personas", badge: null,     color: ["#fbc4d8","#d4476a"] },
+      { id: 3, cat: "torta", nombre: "Torta Naked Vainilla",          desc: "Estilo rústico con frutos rojos y crema de vainilla.",     precio: 32000, unidad: "12 personas", badge: "Nueva",  isNew: true, color: ["#fef7f3","#f9a8c4"] },
+      { id: 4, cat: "torta", nombre: "Torta Red Velvet",              desc: "Tradicional, con crema de queso suave y poco azúcar.",     precio: 30000, unidad: "10 personas", badge: null,     color: ["#a83a4d","#fff"] },
+      { id: 5, cat: "cupcake", nombre: "Cupcakes surtidos x6",        desc: "Vainilla, chocolate, oreo y red velvet.",                  precio: 9800,  unidad: "6 unidades",  badge: "Top",    color: ["#fbc4d8","#fef3c7"] },
+      { id: 6, cat: "cupcake", nombre: "Cupcakes Buttercream x12",    desc: "Decorados a mano con flores de buttercream.",              precio: 18500, unidad: "12 unidades", badge: null,     color: ["#f9a8c4","#fff"] },
+      { id: 7, cat: "brownie", nombre: "Brownies Cuadrados x8",       desc: "Húmedos, intensos en cacao, con nuez opcional.",           precio: 7900,  unidad: "8 unidades",  badge: null,     color: ["#5a3220","#a06840"] },
+      { id: 8, cat: "brownie", nombre: "Brownies con Manjar x6",      desc: "Brownies con corazón de manjar y caramelo salado.",        precio: 9200,  unidad: "6 unidades",  badge: "Nueva",  isNew: true, color: ["#5a3220","#fbbf24"] },
+      { id: 9, cat: "otros", nombre: "Mesa Dulce 30 personas",        desc: "Surtido para fiestas: mini-cupcakes, alfajores, brownies y galletas.", precio: 78000, unidad: "30 personas", badge: "Eventos", color: ["#f9a8c4","#fef3c7","#fbc4d8"] },
+      { id:10, cat: "otros", nombre: "Caja de Alfajores x12",         desc: "Manjar artesanal, masa suave, baño de chocolate.",         precio: 11500, unidad: "12 unidades", badge: null,     color: ["#fef3c7","#a06840"] },
+      { id:11, cat: "otros", nombre: "Cheesecake de Frambuesa",       desc: "Base de galleta, queso crema y salsa de frambuesa.",       precio: 22000, unidad: "8 personas",  badge: null,     color: ["#fbc4d8","#d4476a"] },
+      { id:12, cat: "torta", nombre: "Torta Tres Leches",             desc: "Bizcocho mojado, dulce de leche y crema chantilly.",       precio: 25000, unidad: "10 personas", badge: null,     color: ["#fef7f3","#fbbf24"] }
+    ];
+
+    function svgProducto(p) {
+      var c1 = p.color[0], c2 = p.color[1] || c1, c3 = p.color[2] || c2;
+      return '<svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">' +
+        '<defs><linearGradient id="g'+p.id+'" x1="0" x2="1" y1="0" y2="1">' +
+          '<stop offset="0%" stop-color="'+c1+'"/><stop offset="100%" stop-color="'+c2+'"/></linearGradient></defs>' +
+        '<rect width="200" height="200" fill="url(#g'+p.id+')"/>' +
+        '<circle cx="100" cy="100" r="55" fill="rgba(255,255,255,0.85)"/>' +
+        '<circle cx="100" cy="100" r="40" fill="'+c3+'"/>' +
+        '<text x="100" y="108" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="34" fill="#fff" text-anchor="middle">a</text>' +
+        '</svg>';
+    }
+
+    var productosEl = document.getElementById("productos");
+    var cart = {};
+    var cartListEl = document.getElementById("cart-list");
+    var cartEmpty = document.getElementById("cart-empty");
+    var cartTotal = document.getElementById("cart-total");
+    var totalVal = document.getElementById("total-val");
+    var cartBadge = document.getElementById("cart-badge");
+    var miniCart = document.getElementById("mini-cart");
+    var checkoutBtn = document.getElementById("checkout-btn");
+
+    function fmt(n) { return "$" + n.toLocaleString("es-CL"); }
+
+    function render(cat) {
+      productosEl.replaceChildren();
+      productos.filter(function (p) { return cat === "todos" || p.cat === cat; }).forEach(function (p) {
+        var art = document.createElement("article");
+        art.className = "producto";
+
+        // Thumbnail: SVG construido con datos controlados (hex colors hardcodeados)
+        var thumb = document.createElement("div");
+        thumb.className = "producto-img";
+        thumb.innerHTML = svgProducto(p);
+        if (p.badge) {
+          var badge = document.createElement("span");
+          badge.className = "badge" + (p.isNew ? " new" : "");
+          badge.textContent = p.badge;
+          thumb.appendChild(badge);
+        }
+
+        var body = document.createElement("div");
+        body.className = "producto-body";
+
+        var h3 = document.createElement("h3");
+        h3.textContent = p.nombre;
+
+        var desc = document.createElement("p");
+        desc.className = "desc";
+        desc.textContent = p.desc;
+
+        var precioRow = document.createElement("div");
+        precioRow.className = "precio-row";
+
+        var precio = document.createElement("div");
+        precio.className = "precio";
+        precio.appendChild(document.createTextNode(fmt(p.precio) + " "));
+        var unidadSpan = document.createElement("span");
+        unidadSpan.textContent = "· " + p.unidad;
+        precio.appendChild(unidadSpan);
+
+        var addBtn = document.createElement("button");
+        addBtn.className = "add-btn";
+        addBtn.setAttribute("aria-label", "Agregar al carrito");
+        addBtn.dataset.id = p.id;
+        addBtn.textContent = "+";
+
+        precioRow.appendChild(precio);
+        precioRow.appendChild(addBtn);
+        body.appendChild(h3);
+        body.appendChild(desc);
+        body.appendChild(precioRow);
+
+        art.appendChild(thumb);
+        art.appendChild(body);
+        productosEl.appendChild(art);
+      });
+    }
+
+    function updateCart() {
+      cartListEl.replaceChildren();
+      var keys = Object.keys(cart);
+      var total = 0;
+      var count = 0;
+      keys.forEach(function (k) {
+        var p = productos.find(function (x) { return x.id == k; });
+        var li = document.createElement("li");
+        var s1 = document.createElement("span");
+        s1.textContent = p.nombre + " × " + cart[k];
+        var s2 = document.createElement("span");
+        s2.textContent = fmt(p.precio * cart[k]);
+        li.appendChild(s1);
+        li.appendChild(s2);
+        cartListEl.appendChild(li);
+        total += p.precio * cart[k];
+        count += cart[k];
+      });
+      cartBadge.textContent = count;
+      if (count === 0) {
+        cartEmpty.style.display = "block";
+        cartTotal.style.display = "none";
+        checkoutBtn.style.display = "none";
+      } else {
+        cartEmpty.style.display = "none";
+        cartTotal.style.display = "flex";
+        checkoutBtn.style.display = "inline-flex";
+        totalVal.textContent = fmt(total);
+      }
+    }
+
+    window.cartList = function () {
+      var keys = Object.keys(cart);
+      if (!keys.length) return "";
+      return keys.map(function (k) {
+        var p = productos.find(function (x) { return x.id == k; });
+        return cart[k] + ' × ' + p.nombre;
+      }).join(", ");
+    };
+
+    productosEl.addEventListener("click", function (e) {
+      var btn = e.target.closest(".add-btn");
+      if (!btn) return;
+      var id = btn.dataset.id;
+      cart[id] = (cart[id] || 0) + 1;
+      updateCart();
+      miniCart.classList.add("show");
+      setTimeout(function () { miniCart.classList.remove("show"); }, 2200);
+    });
+
+    document.getElementById("cart-btn").addEventListener("click", function () {
+      miniCart.classList.toggle("show");
+    });
+
+    document.querySelectorAll(".cat-tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        document.querySelectorAll(".cat-tab").forEach(function (t) { t.classList.remove("active"); });
+        tab.classList.add("active");
+        render(tab.dataset.cat);
+      });
+    });
+
+    render("todos");
+    updateCart();
+  })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; form-action 'self'; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Feria de la Plaza — Encuentro comunitario · Sábado 14</title>
+  <meta name="description" content="Encuentro comunitario gratuito: emprendedores locales, talleres, música en vivo y comida del barrio. Sábado 14, 11:00 a 21:00." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+  <style>
+    :root {
+      --bg: #fff8f1;
+      --pink: #ec4899;
+      --orange: #f59e0b;
+      --yellow: #facc15;
+      --teal: #14b8a6;
+      --ink: #1f1235;
+      --muted: #5b4869;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: "Poppins", -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.65; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 22px; }
+
+    .top {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(255,248,241,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(31,18,53,0.08);
+    }
+    .top-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .logo { font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+    .logo-mark {
+      width: 38px; height: 38px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      color: #fff; display: grid; place-items: center; font-size: 18px;
+      transform: rotate(-6deg);
+      box-shadow: 0 8px 18px -6px rgba(236,72,153,0.45);
+    }
+    .top nav { display: flex; gap: 22px; font-size: 14px; }
+    .top nav a { color: var(--muted); font-weight: 500; }
+    .top nav a:hover { color: var(--ink); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 18px; border-radius: 999px; font-weight: 700; font-size: 14px;
+      cursor: pointer; border: 2px solid transparent;
+      transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .btn-grad { background: linear-gradient(135deg, var(--pink), var(--orange)); color: #fff; }
+    .btn-grad:hover { transform: translateY(-2px) rotate(-1deg); }
+    .btn-outline { border-color: var(--ink); color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: #fff; }
+    .btn-teal { background: var(--teal); color: #fff; }
+    .btn-teal:hover { background: #0d9488; }
+    @media (max-width: 760px) { .top nav { display: none; } }
+
+    .hero {
+      position: relative; padding: 80px 0 70px; overflow: hidden;
+      background:
+        radial-gradient(600px 400px at 90% 20%, rgba(250,204,21,0.45), transparent 55%),
+        radial-gradient(500px 400px at 10% 90%, rgba(20,184,166,0.4), transparent 55%),
+        radial-gradient(700px 500px at 50% 50%, rgba(236,72,153,0.18), transparent 55%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 44px; align-items: center; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--pink); background: #fff; padding: 6px 14px; border-radius: 999px;
+      border: 2px solid rgba(236,72,153,0.3);
+    }
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px); line-height: 1.02;
+      margin: 18px 0 14px; font-weight: 800; letter-spacing: -0.02em;
+    }
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p.lead { font-size: 19px; color: var(--muted); max-width: 540px; margin: 0 0 24px; }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .info-strip {
+      margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+      max-width: 540px;
+    }
+    .info-strip > div {
+      background: #fff; border: 2px solid var(--ink); border-radius: 14px;
+      padding: 12px 14px; text-align: center;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .info-strip strong { display: block; font-size: 13px; }
+    .info-strip span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .ticket {
+      position: relative; padding: 30px;
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+      color: #fff; border-radius: 18px;
+      box-shadow: 0 30px 60px -20px rgba(236,72,153,0.5);
+      transform: rotate(2deg);
+    }
+    .ticket .row { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+    .ticket .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.85; }
+    .ticket .value { font-size: 18px; font-weight: 700; }
+    .ticket hr { border: none; border-top: 2px dashed rgba(255,255,255,0.5); margin: 16px 0; }
+    .ticket .big { font-size: 38px; font-weight: 800; line-height: 1; letter-spacing: -0.01em; }
+    .ticket-side {
+      position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+      width: 20px; height: 20px; background: var(--bg); border-radius: 50%;
+    }
+    .ticket-side.l { left: -10px; right: auto; }
+    @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } .ticket { transform: none; } }
+
+    section { padding: 70px 0; }
+    .section-title {
+      font-size: clamp(30px, 4vw, 48px); margin: 0 0 12px; font-weight: 800; letter-spacing: -0.02em;
+    }
+    .section-sub { color: var(--muted); margin: 0 0 32px; max-width: 640px; font-size: 17px; }
+
+    /* PROGRAMA */
+    .programa { display: grid; gap: 14px; }
+    .bloque {
+      display: grid; grid-template-columns: 120px 1fr auto; gap: 18px; align-items: center;
+      background: #fff; border: 2px solid var(--ink); border-radius: 16px;
+      padding: 18px 22px; box-shadow: 6px 6px 0 var(--ink);
+    }
+    .bloque .hora {
+      font-weight: 800; color: var(--pink); font-size: 18px;
+    }
+    .bloque h4 { margin: 0 0 4px; font-size: 17px; }
+    .bloque p { margin: 0; color: var(--muted); font-size: 14px; }
+    .tag {
+      background: var(--yellow); color: var(--ink); font-size: 11px; font-weight: 700;
+      padding: 4px 10px; border-radius: 999px; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .tag.teal { background: var(--teal); color: #fff; }
+    .tag.pink { background: var(--pink); color: #fff; }
+    @media (max-width: 720px) { .bloque { grid-template-columns: 90px 1fr; } .bloque .tag { grid-column: 2; } }
+
+    /* ORGS */
+    .orgs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .org {
+      background: #fff; border: 2px solid var(--ink); border-radius: 16px;
+      padding: 22px; text-align: center; box-shadow: 4px 4px 0 var(--ink);
+    }
+    .org .badge {
+      width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 10px;
+      display: grid; place-items: center; font-size: 26px; color: #fff;
+    }
+    .org h4 { margin: 0 0 4px; font-size: 16px; }
+    .org p { margin: 0; color: var(--muted); font-size: 13px; }
+    @media (max-width: 880px) { .orgs { grid-template-columns: 1fr 1fr; } }
+
+    /* REGISTRO */
+    .registro {
+      background: var(--ink); color: #fff; border-radius: 22px; padding: 40px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+    }
+    .registro h2 { color: #fff; }
+    .registro .section-sub { color: rgba(255,255,255,0.75); }
+    .registro form { display: grid; gap: 12px; }
+    .registro input, .registro select {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      color: #fff; padding: 12px 14px; border-radius: 10px; font-family: inherit; font-size: 14px;
+      outline: none;
+    }
+    .registro input:focus, .registro select:focus { border-color: var(--yellow); }
+    .registro input::placeholder { color: rgba(255,255,255,0.5); }
+    .form-msg { display: none; padding: 10px 12px; border-radius: 8px; font-size: 13px; }
+    .form-msg.ok { display: block; background: rgba(20,184,166,0.18); border: 1px solid var(--teal); color: #ccfbf1; }
+    @media (max-width: 760px) { .registro { grid-template-columns: 1fr; padding: 28px; } }
+
+    /* UBICACION */
+    .mapa-card {
+      background: #fff; border: 2px solid var(--ink); border-radius: 18px;
+      padding: 0; overflow: hidden; box-shadow: 8px 8px 0 var(--ink);
+    }
+    .mapa-svg { aspect-ratio: 16/8; background: linear-gradient(135deg, #ecfeff, #fef3c7); position: relative; }
+    .mapa-svg svg { width: 100%; height: 100%; }
+    .mapa-info { padding: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 720px) { .mapa-info { grid-template-columns: 1fr; } }
+
+    footer {
+      padding: 36px 0; background: var(--ink); color: rgba(255,255,255,0.75); font-size: 14px;
+    }
+    footer .cols { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 22px; margin-bottom: 22px; }
+    footer h4 { margin: 0 0 10px; color: #fff; font-size: 15px; }
+    .demo-note {
+      padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 13px;
+    }
+    .demo-note a { color: var(--yellow); }
+    @media (max-width: 720px) { footer .cols { grid-template-columns: 1fr; } }
+
+    .wa-float {
+      position: fixed; right: 20px; bottom: 20px; z-index: 60;
+      background: #25D366; color: #fff; border-radius: 999px;
+      padding: 13px 18px; font-weight: 700; font-size: 14px;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 16px 40px -10px rgba(37,211,102,0.45);
+    }
+    .wa-icon { width: 20px; height: 20px; fill: #fff; }
+    .back-link {
+      position: fixed; left: 20px; bottom: 20px; z-index: 60;
+      background: var(--ink); color: #fff;
+      padding: 10px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    }
+    .back-link:hover { background: var(--pink); }
+      /* === Banner sticky de demostración === */
+    .icta-banner {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(31,18,53,0.93);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 12px;
+      color: #fde4c2;
+      letter-spacing: 0.03em;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(250,204,21,0.22);
+    }
+    .icta-banner .badge {
+      background: rgba(250,204,21,0.18);
+      border: 1px solid rgba(250,204,21,0.45);
+      color: #facc15;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: ictaBannerPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes ictaBannerPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(236,72,153,0.55); }
+      50%      { box-shadow: 0 0 0 4px rgba(0,0,0,0); }
+    }
+    .icta-banner a {
+      color: #facc15;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .icta-banner a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  
+<div class="icta-banner">
+  <span class="badge">Demo activa</span>
+  Desarrollado por <a href="https://icta.cl" target="_blank" rel="noopener">ICTA Ltda.</a>
+  &nbsp;·&nbsp; Proyecto de demostración &nbsp;·&nbsp;
+  <a href="https://digital.icta.cl" target="_blank" rel="noopener">digital.icta.cl</a>
+</div>
+
+<header class="top">
+    <div class="container top-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">★</span>
+        <span>Feria de la Plaza</span>
+      </a>
+      <nav>
+        <a href="#programa">Programa</a>
+        <a href="#orgs">Organiza</a>
+        <a href="#ubicacion">Ubicación</a>
+        <a href="#registro">Registro</a>
+      </nav>
+      <a class="btn btn-grad" href="#registro">Quiero ir →</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill">★ Evento gratuito · Toda la familia</span>
+        <h1>Feria de la <span class="accent">Plaza</span>: música, oficios y barrio.</h1>
+        <p class="lead">Un día completo de actividades al aire libre: emprendedores locales, talleres
+          para niños, música en vivo y comida de la zona. Te esperamos.</p>
+        <div class="hero-cta">
+          <a class="btn btn-grad" href="#registro">Registrarme gratis</a>
+          <a class="btn btn-outline" href="#programa">Ver programa</a>
+        </div>
+        <div class="info-strip">
+          <div><strong>Sábado 14</strong><span>Fecha</span></div>
+          <div><strong>11:00 → 21:00</strong><span>Horario</span></div>
+          <div><strong>Plaza Central</strong><span>Lugar</span></div>
+        </div>
+      </div>
+      <div class="ticket">
+        <div class="ticket-side l"></div>
+        <div class="ticket-side"></div>
+        <div class="row"><span class="label">Entrada</span><span class="label">N° 0001</span></div>
+        <div class="big">FERIA<br>DE LA PLAZA</div>
+        <hr>
+        <div class="row"><div><span class="label">Cuándo</span><div class="value">Sábado 14</div></div>
+                          <div><span class="label">Hora</span><div class="value">11:00</div></div></div>
+        <div class="row" style="margin-top:14px;"><div><span class="label">Dónde</span><div class="value">Plaza Central</div></div>
+                          <div><span class="label">Costo</span><div class="value">Gratis</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="programa" style="background: #fff;">
+    <div class="container">
+      <h2 class="section-title">Programa del día</h2>
+      <p class="section-sub">Bloques pensados para todas las edades. El programa puede ajustarse según condiciones del clima.</p>
+      <div class="programa">
+        <div class="bloque">
+          <div class="hora">11:00</div>
+          <div><h4>Apertura y feria de emprendedores</h4><p>Más de 30 emprendimientos del barrio: alimentación, oficios, libros, ropa.</p></div>
+          <span class="tag">Inicio</span>
+        </div>
+        <div class="bloque">
+          <div class="hora">12:30</div>
+          <div><h4>Taller infantil de reciclaje creativo</h4><p>Para niños de 5 a 11 años. Cupos limitados. Inscripción en el lugar.</p></div>
+          <span class="tag teal">Niños</span>
+        </div>
+        <div class="bloque">
+          <div class="hora">14:00</div>
+          <div><h4>Cocina del barrio</h4><p>Preparaciones tradicionales por vecinas y vecinos cocineros.</p></div>
+          <span class="tag">Comida</span>
+        </div>
+        <div class="bloque">
+          <div class="hora">16:00</div>
+          <div><h4>Conversatorio: oficios que no se van</h4><p>Conversación abierta con maestros del barrio.</p></div>
+          <span class="tag pink">Charla</span>
+        </div>
+        <div class="bloque">
+          <div class="hora">18:00</div>
+          <div><h4>Música en vivo</h4><p>Bandas locales en escenario al aire libre.</p></div>
+          <span class="tag pink">Música</span>
+        </div>
+        <div class="bloque">
+          <div class="hora">20:30</div>
+          <div><h4>Cierre comunitario</h4><p>Palabras de las organizaciones y agradecimientos.</p></div>
+          <span class="tag">Cierre</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="orgs">
+    <div class="container">
+      <h2 class="section-title">Quiénes organizamos</h2>
+      <p class="section-sub">Vecinos, organizaciones locales y colectivos que se unieron para hacer este encuentro posible.</p>
+      <div class="orgs">
+        <div class="org"><div class="badge" style="background:var(--pink)">★</div><h4>Junta de vecinos</h4><p>Organización del sector central</p></div>
+        <div class="org"><div class="badge" style="background:var(--orange)">♪</div><h4>Colectivo musical</h4><p>Programación de bandas locales</p></div>
+        <div class="org"><div class="badge" style="background:var(--teal)">✿</div><h4>Huerta comunitaria</h4><p>Talleres y producción local</p></div>
+        <div class="org"><div class="badge" style="background:var(--yellow);color:var(--ink)">▣</div><h4>Centro cultural</h4><p>Apoyo logístico y escenario</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion" style="background: #fff;">
+    <div class="container">
+      <h2 class="section-title">Cómo llegar</h2>
+      <p class="section-sub">La plaza es de fácil acceso peatonal y por transporte público.</p>
+      <div class="mapa-card">
+        <div class="mapa-svg">
+          <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <pattern id="grass" width="20" height="20" patternUnits="userSpaceOnUse">
+                <rect width="20" height="20" fill="#d1fae5"/>
+                <circle cx="10" cy="10" r="1" fill="#10b981" opacity="0.3"/>
+              </pattern>
+            </defs>
+            <rect width="800" height="400" fill="#fef3c7"/>
+            <path d="M0,140 L800,140 L800,180 L0,180 Z" fill="#e2e8f0"/>
+            <path d="M0,150 L800,150" stroke="#94a3b8" stroke-width="1" stroke-dasharray="10 8"/>
+            <path d="M380,0 L380,400 L420,400 L420,0 Z" fill="#e2e8f0"/>
+            <path d="M400,0 L400,400" stroke="#94a3b8" stroke-width="1" stroke-dasharray="10 8"/>
+            <rect x="220" y="200" width="360" height="160" fill="url(#grass)" stroke="#10b981" stroke-width="2" rx="14"/>
+            <circle cx="400" cy="280" r="40" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+            <text x="400" y="285" font-family="sans-serif" font-size="16" fill="#92400e" text-anchor="middle" font-weight="700">PLAZA</text>
+            <circle cx="400" cy="280" r="56" fill="none" stroke="#ec4899" stroke-width="3" stroke-dasharray="6 6"/>
+            <rect x="120" y="40" width="120" height="80" fill="#fff" stroke="#1f1235" stroke-width="2" rx="8"/>
+            <text x="180" y="85" font-family="sans-serif" font-size="13" fill="#1f1235" text-anchor="middle">Estación</text>
+            <rect x="600" y="240" width="140" height="100" fill="#fff" stroke="#1f1235" stroke-width="2" rx="8"/>
+            <text x="670" y="295" font-family="sans-serif" font-size="13" fill="#1f1235" text-anchor="middle">Centro Cultural</text>
+          </svg>
+        </div>
+        <div class="mapa-info">
+          <div>
+            <h4 style="margin:0 0 4px;">Dirección</h4>
+            <p style="margin:0;color:var(--muted)">Plaza Central, esquina Av. Principal con Calle del Roble.</p>
+          </div>
+          <div>
+            <h4 style="margin:0 0 4px;">Cómo llegar</h4>
+            <p style="margin:0;color:var(--muted)">A 5 minutos a pie de la estación. Buses del recorrido 12, 14 y 22 paran a una cuadra.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="registro">
+    <div class="container">
+      <div class="registro">
+        <div>
+          <h2 class="section-title" style="margin-bottom:6px;">Regístrate gratis</h2>
+          <p class="section-sub" style="margin-bottom:18px;">Llevamos un conteo aproximado de asistencia para coordinar logística. No es obligatorio, pero ayuda mucho.</p>
+          <a class="btn btn-teal" href="https://wa.me/56992924314?text=Hola%2C%20quiero%20participar%20de%20la%20Feria%20de%20la%20Plaza." target="_blank" rel="noopener noreferrer">Avisarnos por WhatsApp</a>
+        </div>
+        <form onsubmit="event.preventDefault(); document.getElementById('ev-ok').classList.add('ok'); this.reset();">
+          <input type="text" required placeholder="Nombre">
+          <input type="email" required placeholder="Email">
+          <select>
+            <option>Vengo solo/a</option>
+            <option>Vengo con 1 acompañante</option>
+            <option>Vengo con 2 a 4 personas</option>
+            <option>Vengo con grupo grande (5+)</option>
+          </select>
+          <button type="submit" class="btn btn-grad">Registrar asistencia</button>
+          <div id="ev-ok" class="form-msg">✓ ¡Te esperamos! Recibirás un recordatorio el día anterior por correo.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="cols">
+        <div>
+          <h4>Feria de la Plaza</h4>
+          <p>Encuentro comunitario gratuito organizado por vecinos, organizaciones locales y colectivos del barrio.</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p><a href="https://wa.me/56992924314" target="_blank" rel="noopener noreferrer" style="color:var(--yellow)">WhatsApp +56 9 9292 4314</a></p>
+          <p>feriadelaplaza@ejemplo.cl</p>
+        </div>
+        <div>
+          <h4>Redes</h4>
+          <p>@feriadelaplaza<br>Instagram · Facebook</p>
+        </div>
+      </div>
+      <div class="demo-note">
+        <span>Diseño y desarrollo · <strong>ICTA Digital</strong> — <a href="https://digital.icta.cl/" style="color:inherit;text-decoration:underline">icta.cl</a></span>
+        <a href="/">← Volver al portafolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/56992924314?text=Hola%2C%20me%20interesa%20la%20Feria%20de%20la%20Plaza." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.92 11.92 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52Z"/></svg>
+    WhatsApp
+  </a>
+  <a class="back-link" href="/">← Portafolio</a>
+
+</body>
+</html>

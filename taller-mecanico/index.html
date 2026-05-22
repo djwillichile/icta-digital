@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; form-action 'self'; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>TallerPro — Mecánica integral, dirección y suspensión · Servicio rápido</title>
+  <meta name="description" content="Taller mecánico con 20 años de experiencia. Mecánica integral, dirección, suspensión, frenos, scanner y mantención preventiva. Atención rápida y presupuesto sin compromiso." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --panel: #15181d;
+      --panel-2: #1c2027;
+      --line: #262b34;
+      --text: #f3f4f6;
+      --muted: #9aa3b2;
+      --orange: #f97316;
+      --orange-dark: #ea580c;
+      --yellow: #facc15;
+      --red: #ef4444;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+    h1, h2, h3 { letter-spacing: -0.02em; font-weight: 800; text-transform: uppercase; }
+
+    .top {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(13,15,18,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .top-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: 0.02em; }
+    .logo-mark {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--orange), var(--yellow));
+      color: #111; display: grid; place-items: center; font-weight: 900; font-size: 18px;
+      box-shadow: 0 8px 20px -6px rgba(249,115,22,0.5);
+    }
+    .top nav { display: flex; gap: 22px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .top nav a { color: var(--muted); }
+    .top nav a:hover { color: var(--orange); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 22px; border-radius: 6px; font-weight: 700; font-size: 14px;
+      border: 2px solid transparent; cursor: pointer; text-transform: uppercase; letter-spacing: 0.04em;
+      transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .btn-orange { background: var(--orange); color: #111; }
+    .btn-orange:hover { background: var(--yellow); transform: translateY(-2px); }
+    .btn-outline { border-color: var(--line); color: var(--text); }
+    .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+    @media (max-width: 880px) { .top nav { display: none; } }
+
+    /* HERO */
+    .hero {
+      position: relative; padding: 90px 0 80px; overflow: hidden;
+      background:
+        radial-gradient(900px 500px at 90% -10%, rgba(249,115,22,0.18), transparent 60%),
+        radial-gradient(700px 500px at -10% 110%, rgba(250,204,21,0.08), transparent 60%);
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.06;
+      background-image:
+        repeating-linear-gradient(45deg, var(--orange) 0 2px, transparent 2px 24px);
+    }
+    .hero-grid {
+      position: relative; display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: center;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--orange); background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.4); padding: 7px 14px; border-radius: 6px;
+    }
+    .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 12px var(--yellow); }
+    .hero h1 {
+      font-size: clamp(44px, 6.5vw, 76px); line-height: 0.98;
+      margin: 18px 0 16px; font-weight: 900; letter-spacing: -0.02em;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--orange), var(--yellow));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p.lead { font-size: 18px; color: var(--muted); max-width: 540px; margin: 0 0 28px; text-transform: none; }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-trust { margin-top: 32px; display: flex; gap: 28px; flex-wrap: wrap; }
+    .trust-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--text); font-weight: 600;
+    }
+    .trust-item .check {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(34,197,94,0.18); color: #22c55e;
+      display: grid; place-items: center; font-weight: 800;
+    }
+
+    .hero-art {
+      position: relative; aspect-ratio: 4/4.4; border-radius: 14px; overflow: hidden;
+      background: linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
+      border: 2px solid var(--line);
+      box-shadow: 0 30px 80px -25px rgba(249,115,22,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .hero-art::before {
+      content: ""; position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg, rgba(249,115,22,0.05) 0 2px, transparent 2px 18px);
+      opacity: 0.5;
+    }
+    .hero-art svg { width: 100%; height: 100%; position: relative; }
+    .meter {
+      position: absolute; right: 18px; top: 18px;
+      background: rgba(0,0,0,0.6); border: 1px solid var(--line); border-radius: 8px;
+      padding: 10px 14px; min-width: 140px;
+    }
+    .meter span { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .meter strong { display: block; font-size: 22px; color: var(--yellow); font-weight: 800; line-height: 1; margin-top: 4px; }
+    .badge-tag {
+      position: absolute; left: 18px; bottom: 18px;
+      background: var(--orange); color: #111;
+      padding: 8px 14px; border-radius: 6px;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } .hero-art { max-width: 420px; margin: 0 auto; } }
+
+    section { padding: 80px 0; }
+    .section-title { font-size: clamp(28px, 4vw, 44px); margin: 0 0 12px; }
+    .section-sub { color: var(--muted); margin: 0 0 40px; max-width: 700px; font-size: 16px; text-transform: none; font-weight: 400; }
+
+    /* SERVICIOS */
+    .servicios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .servicio {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 26px;
+      position: relative; overflow: hidden;
+      transition: transform .15s ease, border-color .2s ease;
+    }
+    .servicio::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--orange);
+      transform: scaleY(0); transform-origin: top; transition: transform .25s ease;
+    }
+    .servicio:hover { transform: translateY(-3px); border-color: var(--orange); }
+    .servicio:hover::before { transform: scaleY(1); }
+    .servicio .num {
+      font-size: 12px; font-weight: 800; color: var(--orange); letter-spacing: 0.12em; margin-bottom: 8px;
+    }
+    .servicio h3 { margin: 0 0 8px; font-size: 17px; }
+    .servicio p { margin: 0; color: var(--muted); font-size: 14px; }
+    @media (max-width: 880px) { .servicios { grid-template-columns: 1fr; } }
+
+    /* ZONAS */
+    .zonas-block {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+      padding: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center;
+    }
+    .zonas-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .zonas-list li {
+      padding: 10px 14px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px;
+      font-size: 14px; display: flex; align-items: center; gap: 10px;
+    }
+    .zonas-list li::before { content: "📍"; }
+    @media (max-width: 760px) { .zonas-block { grid-template-columns: 1fr; padding: 26px; } }
+
+    /* HORARIOS */
+    .horarios-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+    }
+    .horario {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+      padding: 26px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .horario .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--line); font-family: monospace; font-size: 15px; }
+    .horario .row:last-child { border-bottom: none; }
+    .horario .row.closed span:last-child { color: var(--red); font-weight: 700; }
+    .horario h3 { margin: 0 0 14px; font-size: 18px; color: var(--orange); }
+    @media (max-width: 760px) { .horarios-block { grid-template-columns: 1fr; } }
+
+    /* CTA banner */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--orange-dark), var(--orange));
+      color: #111; border-radius: 14px; padding: 44px;
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 30px; align-items: center;
+    }
+    .cta-banner h2 { color: #111; margin: 0 0 8px; font-size: 30px; }
+    .cta-banner p { margin: 0; font-size: 17px; }
+    .btn-dark { background: #111; color: var(--yellow); }
+    .btn-dark:hover { background: #000; color: var(--orange); }
+    @media (max-width: 760px) { .cta-banner { grid-template-columns: 1fr; padding: 30px; } }
+
+    /* TESTIMONIOS */
+    .testimonios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .testimonio {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 26px;
+    }
+    .stars { color: var(--yellow); font-size: 16px; letter-spacing: 2px; margin-bottom: 12px; }
+    .testimonio p { margin: 0 0 14px; color: var(--text); font-size: 15px; }
+    .testimonio .autor { color: var(--muted); font-size: 13px; }
+    @media (max-width: 880px) { .testimonios { grid-template-columns: 1fr; } }
+
+    /* CONTACTO */
+    .contacto { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .contacto form {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 28px;
+      display: grid; gap: 12px;
+    }
+    .contacto input, .contacto select, .contacto textarea {
+      background: var(--panel-2); border: 1px solid var(--line); color: var(--text);
+      padding: 12px 14px; border-radius: 6px; font-family: inherit; font-size: 14px;
+      outline: none;
+    }
+    .contacto input:focus, .contacto select:focus, .contacto textarea:focus { border-color: var(--orange); }
+    .contacto textarea { resize: vertical; min-height: 90px; }
+    .form-msg { display: none; padding: 12px 14px; border-radius: 8px; font-size: 14px; }
+    .form-msg.ok { display: block; background: rgba(34,197,94,0.12); border: 1px solid #22c55e; color: #86efac; }
+    .info-block { display: flex; flex-direction: column; gap: 14px; }
+    .info-card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .info-card .icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(249,115,22,0.15); color: var(--orange);
+      display: grid; place-items: center; font-size: 20px;
+    }
+    .info-card strong { display: block; font-size: 15px; }
+    .info-card span { color: var(--muted); font-size: 13px; }
+    @media (max-width: 880px) { .contacto { grid-template-columns: 1fr; } }
+
+    footer {
+      padding: 40px 0 28px; background: #07080a; color: var(--muted); font-size: 14px;
+      border-top: 1px solid var(--line);
+    }
+    footer .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; margin-bottom: 24px; }
+    footer h4 { margin: 0 0 10px; color: var(--text); font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .demo-note {
+      padding-top: 18px; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 13px;
+    }
+    .demo-note a { color: var(--orange); }
+    @media (max-width: 760px) { footer .cols { grid-template-columns: 1fr; } }
+
+    .wa-float {
+      position: fixed; right: 20px; bottom: 20px; z-index: 60;
+      background: #25D366; color: #fff; border-radius: 6px;
+      padding: 13px 18px; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 16px 40px -10px rgba(37,211,102,0.45);
+    }
+    .wa-icon { width: 20px; height: 20px; fill: #fff; }
+    .back-link {
+      position: fixed; left: 20px; bottom: 20px; z-index: 60;
+      background: var(--panel); border: 1px solid var(--line); color: var(--text);
+      padding: 11px 16px; border-radius: 6px; font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .back-link:hover { border-color: var(--orange); color: var(--orange); }
+      /* === Banner sticky de demostración === */
+    .icta-banner {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(13,15,18,0.96);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 12px;
+      color: #9aa3b2;
+      letter-spacing: 0.03em;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(249,115,22,0.2);
+    }
+    .icta-banner .badge {
+      background: rgba(249,115,22,0.15);
+      border: 1px solid rgba(249,115,22,0.4);
+      color: #f97316;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: ictaBannerPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes ictaBannerPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.5); }
+      50%      { box-shadow: 0 0 0 4px rgba(0,0,0,0); }
+    }
+    .icta-banner a {
+      color: #facc15;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .icta-banner a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  
+<div class="icta-banner">
+  <span class="badge">Demo activa</span>
+  Desarrollado por <a href="https://icta.cl" target="_blank" rel="noopener">ICTA Ltda.</a>
+  &nbsp;·&nbsp; Proyecto de demostración &nbsp;·&nbsp;
+  <a href="https://digital.icta.cl" target="_blank" rel="noopener">digital.icta.cl</a>
+</div>
+
+<header class="top">
+    <div class="container top-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">⚙</span>
+        <span>TallerPro</span>
+      </a>
+      <nav>
+        <a href="#servicios">Servicios</a>
+        <a href="#zonas">Zonas</a>
+        <a href="#horarios">Horarios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="btn btn-orange" href="#contacto">Pedir hora →</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill"><span class="dot"></span> Atención de lunes a sábado</span>
+        <h1>Mecánica <span>profesional</span><br>sin sorpresas en la boleta.</h1>
+        <p class="lead">Más de 20 años atendiendo automovilistas. Diagnóstico claro, presupuesto antes de
+          ejecutar y trabajo con repuestos garantizados. Si no es necesario, no se cambia.</p>
+        <div class="hero-cta">
+          <a class="btn btn-orange" href="#contacto">Solicitar cotización</a>
+          <a class="btn btn-outline" href="#servicios">Ver servicios</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item"><span class="check">✓</span> Presupuesto sin compromiso</div>
+          <div class="trust-item"><span class="check">✓</span> Garantía 6 meses</div>
+          <div class="trust-item"><span class="check">✓</span> Boleta o factura</div>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 400 440" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="floor" cx="50%" cy="100%">
+              <stop offset="0%" stop-color="#1c2027"/>
+              <stop offset="100%" stop-color="#0d0f12"/>
+            </radialGradient>
+            <linearGradient id="metal" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#3a3f4a"/>
+              <stop offset="100%" stop-color="#1c2027"/>
+            </linearGradient>
+            <linearGradient id="orange" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#f97316"/>
+              <stop offset="100%" stop-color="#ea580c"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="440" fill="url(#floor)"/>
+          <g opacity="0.15" stroke="#9aa3b2" stroke-width="0.5">
+            <path d="M0,340 L400,340"/><path d="M0,360 L400,360"/><path d="M0,380 L400,380"/>
+          </g>
+          <g transform="translate(200,250)">
+            <ellipse cx="0" cy="120" rx="120" ry="14" fill="rgba(0,0,0,0.5)"/>
+            <path d="M-110,30 Q-110,0 -90,0 L-50,0 Q-30,-40 0,-40 Q30,-40 50,0 L90,0 Q110,0 110,30 L110,80 Q110,100 90,100 L-90,100 Q-110,100 -110,80 Z" fill="url(#metal)" stroke="#262b34" stroke-width="2"/>
+            <path d="M-50,0 Q-30,-40 0,-40 Q30,-40 50,0" fill="none" stroke="url(#orange)" stroke-width="3"/>
+            <circle cx="-65" cy="100" r="32" fill="#0d0f12" stroke="#3a3f4a" stroke-width="3"/>
+            <circle cx="-65" cy="100" r="18" fill="url(#metal)"/>
+            <circle cx="65" cy="100" r="32" fill="#0d0f12" stroke="#3a3f4a" stroke-width="3"/>
+            <circle cx="65" cy="100" r="18" fill="url(#metal)"/>
+            <rect x="-30" y="-25" width="60" height="22" rx="4" fill="#15181d" stroke="url(#orange)" stroke-width="1.5"/>
+          </g>
+          <g transform="translate(60,90)" opacity="0.7">
+            <circle r="34" fill="none" stroke="#3a3f4a" stroke-width="3"/>
+            <circle r="28" fill="none" stroke="#facc15" stroke-width="2" stroke-dasharray="3 3"/>
+            <line x1="0" y1="0" x2="20" y2="-15" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <div class="meter">
+          <span>Diagnóstico</span>
+          <strong>OK · Listo</strong>
+        </div>
+        <div class="badge-tag">★ +20 años en el rubro</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" style="background: var(--panel-2);">
+    <div class="container">
+      <h2 class="section-title">Servicios principales</h2>
+      <p class="section-sub">Trabajamos con vehículos livianos de pasajeros y SUV de todas las marcas. Si tu auto necesita atención específica, escríbenos antes para confirmar disponibilidad.</p>
+      <div class="servicios">
+        <div class="servicio"><div class="num">01</div><h3>Mecánica integral</h3><p>Motor, embrague, caja y transmisión. Diagnóstico con escáner.</p></div>
+        <div class="servicio"><div class="num">02</div><h3>Frenos completos</h3><p>Pastillas, discos, balatas, sangrado y revisión de líneas.</p></div>
+        <div class="servicio"><div class="num">03</div><h3>Suspensión y dirección</h3><p>Amortiguadores, brazos, terminales, alineación y balanceo.</p></div>
+        <div class="servicio"><div class="num">04</div><h3>Mantención preventiva</h3><p>Aceite, filtros, correas, bujías y revisión de 30 puntos.</p></div>
+        <div class="servicio"><div class="num">05</div><h3>Aire acondicionado</h3><p>Carga de gas, sanitización, revisión de fugas y compresor.</p></div>
+        <div class="servicio"><div class="num">06</div><h3>Eléctrico y batería</h3><p>Diagnóstico de fallas, alternador, partida y batería con prueba.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="zonas">
+    <div class="container">
+      <h2 class="section-title">Zonas de atención</h2>
+      <p class="section-sub">Atendemos en taller. Si tu auto no parte, también podemos coordinar grúa con valor preferente con empresas asociadas.</p>
+      <div class="zonas-block">
+        <div>
+          <h3 style="font-size:20px;margin:0 0 12px;text-transform:none;letter-spacing:0;">Cobertura habitual</h3>
+          <p style="color:var(--muted);margin:0;">Recibimos vehículos de toda la Región Metropolitana. Estas son las comunas con mayor frecuencia de clientes:</p>
+        </div>
+        <ul class="zonas-list">
+          <li>La Florida</li>
+          <li>Puente Alto</li>
+          <li>San Joaquín</li>
+          <li>Macul</li>
+          <li>Ñuñoa</li>
+          <li>La Granja</li>
+          <li>San Miguel</li>
+          <li>Peñalolén</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios" style="background: var(--panel-2);">
+    <div class="container">
+      <h2 class="section-title">Horarios y agenda</h2>
+      <p class="section-sub">Pedir hora previa nos ayuda a atenderte más rápido. También recibimos sin agenda si hay disponibilidad.</p>
+      <div class="horarios-block">
+        <div class="horario">
+          <h3>Recepción</h3>
+          <div class="row"><span>Lun a Vie</span><span>08:30 — 18:30</span></div>
+          <div class="row"><span>Sábado</span><span>09:00 — 14:00</span></div>
+          <div class="row closed"><span>Domingo</span><span>Cerrado</span></div>
+          <div class="row closed"><span>Festivos</span><span>Cerrado</span></div>
+        </div>
+        <div class="horario">
+          <h3>Cómo agendar</h3>
+          <p style="text-transform:none;font-weight:400;color:var(--muted);margin:0 0 14px;font-size:15px;">Tres formas rápidas de coordinar tu visita al taller:</p>
+          <div class="row"><span>WhatsApp</span><span style="color:var(--orange)">+56 9 9292 4314</span></div>
+          <div class="row"><span>Formulario</span><span>Más abajo ↓</span></div>
+          <div class="row"><span>Sin agenda</span><span>Por orden de llegada</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="cta-banner">
+        <div>
+          <h2>¿Tu auto está fallando? Mejor revísalo antes.</h2>
+          <p>Diagnóstico con escáner desde $15.000. Si el arreglo se hace con nosotros, el diagnóstico va con descuento.</p>
+        </div>
+        <a class="btn btn-dark" href="https://wa.me/56992924314?text=Hola%2C%20quisiera%20pedir%20una%20hora%20para%20diagn%C3%B3stico." target="_blank" rel="noopener noreferrer">Agendar diagnóstico</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--panel-2);">
+    <div class="container">
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-sub">Reseñas de clientes habituales del taller.</p>
+      <div class="testimonios">
+        <div class="testimonio">
+          <div class="stars">★★★★★</div>
+          <p>"Llegué con un ruido raro al frenar y me explicaron paso a paso qué tenía. Cobraron lo justo y quedó como nuevo."</p>
+          <div class="autor">— Carlos M., cliente desde 2019</div>
+        </div>
+        <div class="testimonio">
+          <div class="stars">★★★★★</div>
+          <p>"Atención súper honesta. Me dijeron que algo todavía no era urgente y que lo viéramos en la próxima mantención."</p>
+          <div class="autor">— Patricia R., 2024</div>
+        </div>
+        <div class="testimonio">
+          <div class="stars">★★★★★</div>
+          <p>"Vengo con dos autos hace años. Buen servicio, repuestos buenos y respetan el plazo que comprometen."</p>
+          <div class="autor">— Hernán C., cliente habitual</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="container">
+      <h2 class="section-title">Pide tu hora</h2>
+      <p class="section-sub">Cuéntanos qué necesita tu vehículo y coordinamos un horario que te acomode. Respondemos rápido.</p>
+      <div class="contacto">
+        <form onsubmit="event.preventDefault(); document.getElementById('tp-ok').classList.add('ok'); this.reset();">
+          <input type="text" required placeholder="Nombre">
+          <input type="tel" required placeholder="Teléfono / WhatsApp">
+          <input type="text" required placeholder="Marca, modelo y año">
+          <select>
+            <option>Mantención preventiva</option>
+            <option>Frenos</option>
+            <option>Suspensión / dirección</option>
+            <option>Aire acondicionado</option>
+            <option>Diagnóstico (revisión general)</option>
+            <option>Otro / no estoy seguro</option>
+          </select>
+          <textarea placeholder="Cuéntanos qué le pasa al auto"></textarea>
+          <button class="btn btn-orange" type="submit">Solicitar hora</button>
+          <div id="tp-ok" class="form-msg">✓ Recibimos tu solicitud. Te llamaremos para coordinar la hora.</div>
+        </form>
+        <div class="info-block">
+          <div class="info-card"><div class="icon">📍</div><div><strong>Av. Vicuña Mackenna 8200</strong><span>La Florida · Santiago</span></div></div>
+          <div class="info-card"><div class="icon">📞</div><div><strong><a href="https://wa.me/56992924314" target="_blank" rel="noopener noreferrer" style="color:var(--orange)">WhatsApp +56 9 9292 4314</a></strong><span>Respuesta dentro del día</span></div></div>
+          <div class="info-card"><div class="icon">⏱</div><div><strong>Lun a Vie 08:30 — 18:30</strong><span>Sábado 09:00 — 14:00</span></div></div>
+          <div class="info-card"><div class="icon">💳</div><div><strong>Boleta o factura</strong><span>Aceptamos transferencia y tarjeta</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="cols">
+        <div>
+          <h4>TallerPro</h4>
+          <p>Taller mecánico con más de 20 años atendiendo automovilistas en la Región Metropolitana.
+            Servicio honesto, presupuesto previo y repuestos garantizados.</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p><a href="https://wa.me/56992924314" target="_blank" rel="noopener noreferrer" style="color: var(--orange)">WhatsApp +56 9 9292 4314</a></p>
+          <p>contacto@tallerpro.cl</p>
+        </div>
+        <div>
+          <h4>Horario</h4>
+          <p>Lun a Vie 08:30 — 18:30<br>Sáb 09:00 — 14:00</p>
+        </div>
+      </div>
+      <div class="demo-note">
+        <span>Diseño y desarrollo · <strong>ICTA Digital</strong> — <a href="https://digital.icta.cl/" style="color:inherit;text-decoration:underline">icta.cl</a></span>
+        <a href="/">← Volver al portafolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/56992924314?text=Hola%2C%20quiero%20pedir%20hora%20en%20TallerPro." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.92 11.92 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52Z"/></svg>
+    Pedir hora
+  </a>
+  <a class="back-link" href="/">← Portafolio</a>
+
+</body>
+</html>
