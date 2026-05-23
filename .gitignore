@@ -11,4 +11,5 @@ optimize-cache/
 
 # Logs locales
 *.log
-ignoring .wrangler
+.wrangler/
+node_modules/
