@@ -625,6 +625,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:56px 5% 3
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important}
 }
+/* Back-link al portafolio — fijo abajo a la izquierda */
+.back-link{
+  position:fixed;left:20px;bottom:20px;z-index:9999;
+  background:rgba(15,15,15,.92);border:1px solid var(--border);color:var(--text);
+  padding:11px 16px;border-radius:6px;font-size:13px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.04em;text-decoration:none;
+  backdrop-filter:blur(8px);
+  transition:border-color .25s var(--ease),color .25s var(--ease),transform .25s var(--ease);
+}
+.back-link:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
 </style>
 </head>
 <body>
@@ -1249,5 +1259,6 @@ cursosToggle.addEventListener('click', () => {
   }
 });
 </script>
+<a class="back-link" href="/">← Portafolio</a>
 </body>
 </html>
