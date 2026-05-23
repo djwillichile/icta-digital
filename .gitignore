@@ -11,3 +11,4 @@ optimize-cache/
 
 # Logs locales
 *.log
+ignoring .wrangler
